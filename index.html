@@ -3,47 +3,55 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>School Board Review — Public Meetings, Publicly Reviewed</title>
+  <title>School Board Review — Governance Scorecard</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
       --purple:       #553C7B;
+      --purple-mid:   #9B59B6;
+      --purple-dark:  #3A2857;
+      --purple-tint:  #F8F7FF;
+      --purple-100:   #E8E0F5;
+      --purple-200:   #D0C4E8;
+      --green:        #27AE60;
+      --orange:       #F39C12;
+      --red:          #E74C3C;
+      --text:         #1A1A1A;
+      --text-muted:   #6B6580;
       --white:        #FFFFFF;
-      --lavender:     #E8E0F5;
-      --dark-purple:  #3A2857;
-      --pale-lavender:#F5F0FF;
+      --border:       #E2DAEA;
     }
 
     body {
       font-family: 'DM Sans', sans-serif;
       font-weight: 400;
-      color: #1a1a2e;
-      background: var(--white);
+      color: var(--text);
+      background: var(--purple-tint);
     }
 
     /* ── NAV ── */
-    .nav {
+    nav {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: var(--dark-purple);
+      background: var(--white);
+      border-bottom: 2px solid var(--purple-100);
       padding: 0 2rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 64px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+      height: 60px;
+      box-shadow: 0 2px 8px rgba(85,60,123,0.08);
     }
     .nav-logo {
       font-family: 'DM Serif Display', serif;
-      font-size: 1.25rem;
-      color: var(--white);
+      font-size: 1.2rem;
+      color: var(--purple);
       text-decoration: none;
-      letter-spacing: 0.01em;
     }
     .nav-links {
       display: flex;
@@ -51,358 +59,771 @@
       list-style: none;
     }
     .nav-links a {
-      color: rgba(255,255,255,0.82);
+      color: var(--text-muted);
       text-decoration: none;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       font-weight: 500;
-      letter-spacing: 0.03em;
+      letter-spacing: 0.02em;
       transition: color 0.15s;
     }
-    .nav-links a:hover { color: var(--white); }
+    .nav-links a:hover { color: var(--purple); }
 
-    /* ── HERO ── */
-    .hero {
-      background: var(--dark-purple);
-      padding: 5rem 2rem 4.5rem;
-      text-align: center;
+    /* ── HERO STAT STRIP ── */
+    .hero-strip {
+      background: var(--purple);
+      padding: 2.5rem 2rem;
     }
     .hero-inner {
-      max-width: 760px;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+    }
+    .hero-stat {
+      text-align: center;
+      padding: 1rem 1.5rem;
+      position: relative;
+    }
+    .hero-stat:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 20%;
+      height: 60%;
+      width: 1px;
+      background: rgba(255,255,255,0.2);
+    }
+    .hero-stat-number {
+      font-family: 'DM Serif Display', serif;
+      font-size: 4rem;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+    .hero-stat-label {
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+    }
+
+    /* ── HOW SCORING WORKS ── */
+    .scoring-section {
+      background: var(--white);
+      padding: 2.5rem 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .scoring-inner {
+      max-width: 1100px;
       margin: 0 auto;
     }
-    .hero h1 {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(2rem, 5vw, 3rem);
-      color: var(--white);
-      line-height: 1.25;
-      margin-bottom: 1.25rem;
-    }
-    .hero p {
-      color: rgba(255,255,255,0.78);
-      font-size: 1.05rem;
-      line-height: 1.7;
-      font-weight: 300;
-      margin-bottom: 2rem;
-    }
-    .btn-primary {
-      display: inline-block;
-      background: var(--lavender);
-      color: var(--dark-purple);
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 600;
-      font-size: 0.95rem;
-      padding: 0.8rem 1.75rem;
-      border-radius: 4px;
-      text-decoration: none;
-      letter-spacing: 0.02em;
-      transition: background 0.15s, transform 0.1s;
-    }
-    .btn-primary:hover { background: #d5c8ef; transform: translateY(-1px); }
-
-    /* ── FEATURED REVIEW ── */
-    .featured {
-      background: var(--white);
-      padding: 4rem 2rem;
-    }
-    .section-label {
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--purple);
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
       margin-bottom: 1.5rem;
     }
-    .review-card {
-      max-width: 780px;
-      margin: 0 auto;
-      border: 1px solid #e2daea;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 4px 24px rgba(85,60,123,0.08);
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem;
+      color: var(--purple-dark);
     }
-    .card-header {
-      padding: 2rem 2rem 1.5rem;
-      border-bottom: 1px solid #ede8f5;
+    .section-rule {
+      flex: 1;
+      height: 1px;
+      background: var(--purple-100);
     }
-    .score-badge {
-      display: inline-block;
+    .criteria-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1rem;
+    }
+    .criterion-block {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+    .criterion-num {
+      width: 32px;
+      height: 32px;
+      min-width: 32px;
+      border-radius: 50%;
       background: var(--purple);
       color: var(--white);
       font-size: 0.8rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+    }
+    .criterion-info {
+      flex: 1;
+    }
+    .criterion-name-sm {
+      font-size: 0.82rem;
       font-weight: 600;
-      letter-spacing: 0.06em;
-      padding: 0.35rem 0.9rem;
-      border-radius: 20px;
-      margin-bottom: 1rem;
-      text-transform: uppercase;
-    }
-    .card-header h2 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.5rem;
+      color: var(--purple-dark);
       line-height: 1.3;
-      color: var(--dark-purple);
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.2rem;
     }
-    .review-date {
-      font-size: 0.85rem;
-      color: #6b6580;
-      font-weight: 400;
+    .criterion-pts {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      letter-spacing: 0.03em;
     }
 
-    /* Score breakdown */
-    .score-breakdown {
-      padding: 1.75rem 2rem;
-      border-bottom: 1px solid #ede8f5;
-      background: var(--pale-lavender);
+    /* ── REVIEWS SECTION ── */
+    .reviews-section {
+      padding: 2.5rem 2rem;
     }
-    .score-breakdown h3 {
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--purple);
-      margin-bottom: 1.25rem;
+    .reviews-inner {
+      max-width: 1100px;
+      margin: 0 auto;
     }
-    .criterion {
+
+    /* ── DISTRICT CARDS GRID ── */
+    .cards-grid {
       display: grid;
-      grid-template-columns: 160px 1fr 52px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+    .district-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(85,60,123,0.06);
+      transition: box-shadow 0.15s, transform 0.15s;
+    }
+    .district-card:hover {
+      box-shadow: 0 6px 20px rgba(85,60,123,0.13);
+      transform: translateY(-2px);
+    }
+    .card-top {
+      padding: 1.25rem 1.25rem 0;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+    .district-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.05rem;
+      color: var(--purple-dark);
+      line-height: 1.3;
+    }
+    .state-badge {
+      background: var(--purple-100);
+      color: var(--purple);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      padding: 0.2rem 0.55rem;
+      border-radius: 3px;
+      white-space: nowrap;
+      margin-top: 3px;
+    }
+    .card-score-row {
+      padding: 0.75rem 1.25rem 0.75rem;
+      display: flex;
       align-items: center;
       gap: 0.75rem;
-      margin-bottom: 0.85rem;
+      border-bottom: 1px solid var(--purple-100);
     }
-    .criterion:last-child { margin-bottom: 0; }
-    .criterion-name {
-      font-size: 0.875rem;
+    .composite-score {
+      font-family: 'DM Serif Display', serif;
+      font-size: 3rem;
+      line-height: 1;
+      font-weight: 400;
+    }
+    .score-green { color: var(--green); }
+    .score-orange { color: var(--orange); }
+    .score-red { color: var(--red); }
+
+    .score-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+    .score-denom {
+      font-size: 0.78rem;
+      color: var(--text-muted);
       font-weight: 500;
-      color: var(--dark-purple);
-      white-space: nowrap;
     }
-    .bar-track {
+    .score-tier {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .tier-green { color: var(--green); }
+    .tier-orange { color: var(--orange); }
+    .tier-red { color: var(--red); }
+
+    .card-criteria {
+      padding: 0.85rem 1.25rem;
+    }
+    .mini-bar-row {
+      display: grid;
+      grid-template-columns: 100px 1fr 28px;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .mini-bar-row:last-child { margin-bottom: 0; }
+    .mini-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .score-bar-track {
+      background: #E0D9F0;
       height: 8px;
-      background: rgba(85,60,123,0.15);
       border-radius: 4px;
       overflow: hidden;
     }
-    .bar-fill {
-      height: 100%;
-      background: var(--purple);
+    .score-bar-fill {
+      height: 8px;
       border-radius: 4px;
-      transition: width 0.6s ease;
     }
-    .criterion-score {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--purple);
+    .score-high { background: var(--green); }
+    .score-mid  { background: var(--orange); }
+    .score-low  { background: var(--red); }
+
+    .mini-score-num {
+      font-size: 0.68rem;
+      font-weight: 700;
       text-align: right;
-      white-space: nowrap;
     }
 
-    /* Card body */
-    .card-body {
-      padding: 1.75rem 2rem 2rem;
+    .card-footer {
+      padding: 0.75rem 1.25rem;
+      border-top: 1px solid var(--purple-100);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
-    .card-body p {
-      font-size: 0.97rem;
-      line-height: 1.75;
-      color: #2d2540;
-      margin-bottom: 1.25rem;
+    .meeting-date {
+      font-size: 0.72rem;
+      color: var(--text-muted);
     }
     .read-more {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-      color: var(--purple);
+      font-size: 0.78rem;
       font-weight: 600;
-      font-size: 0.9rem;
+      color: var(--purple);
       text-decoration: none;
-      border-bottom: 2px solid transparent;
-      transition: border-color 0.15s;
+      letter-spacing: 0.01em;
+      transition: color 0.15s;
     }
-    .read-more:hover { border-color: var(--purple); }
+    .read-more:hover { color: var(--purple-mid); }
 
-    /* ── RECENT REVIEWS ── */
-    .recent {
-      background: var(--pale-lavender);
-      padding: 4rem 2rem;
+    /* ── LEADERBOARD ── */
+    .leaderboard {
+      background: var(--purple-100);
+      border-top: 1px solid var(--purple-200);
+      border-bottom: 1px solid var(--purple-200);
+      padding: 2.5rem 2rem;
     }
-    .recent-inner {
-      max-width: 1000px;
+    .leaderboard-inner {
+      max-width: 1100px;
       margin: 0 auto;
     }
-    .recent h2 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.75rem;
-      color: var(--dark-purple);
-      margin-bottom: 2rem;
-    }
-    .cards-grid {
+    .podium-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
     }
-    .mini-card {
+    .podium-card {
       background: var(--white);
-      border: 1px solid #e2daea;
+      border: 1px solid var(--border);
       border-radius: 8px;
-      padding: 1.75rem;
-      box-shadow: 0 2px 12px rgba(85,60,123,0.06);
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      box-shadow: 0 2px 6px rgba(85,60,123,0.06);
     }
-    .mini-card .score-badge { margin-bottom: 0.85rem; }
-    .mini-card h3 {
+    .podium-rank {
       font-family: 'DM Serif Display', serif;
-      font-size: 1.15rem;
-      color: var(--dark-purple);
-      margin-bottom: 0.35rem;
-      line-height: 1.3;
+      font-size: 2.2rem;
+      color: var(--purple-200);
+      line-height: 1;
+      min-width: 2rem;
     }
-    .mini-card .review-date { margin-bottom: 0.9rem; }
-    .mini-card p {
-      font-size: 0.9rem;
-      line-height: 1.65;
-      color: #3d3455;
-      margin-bottom: 1rem;
+    .podium-rank.gold   { color: #F4C542; }
+    .podium-rank.silver { color: #A8A8A8; }
+    .podium-rank.bronze { color: #C08040; }
+    .podium-info {
+      flex: 1;
+    }
+    .podium-district {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1rem;
+      color: var(--purple-dark);
+      margin-bottom: 0.15rem;
+    }
+    .podium-score {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--green);
     }
 
     /* ── FOOTER ── */
-    .footer {
-      background: var(--dark-purple);
-      color: rgba(255,255,255,0.72);
+    footer {
+      background: var(--purple);
       padding: 2.5rem 2rem;
       text-align: center;
     }
     .footer-logo {
       font-family: 'DM Serif Display', serif;
-      color: var(--white);
       font-size: 1.1rem;
-      margin-bottom: 0.6rem;
+      color: var(--white);
+      margin-bottom: 0.4rem;
     }
-    .footer p {
+    footer p {
       font-size: 0.82rem;
+      color: rgba(255,255,255,0.65);
       line-height: 1.7;
-      max-width: 560px;
-      margin: 0 auto 0.4rem;
     }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 768px) {
-      .nav { padding: 0 1rem; }
-      .nav-logo { font-size: 1.05rem; }
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: repeat(3, 1fr); }
+      .hero-stat-number { font-size: 2.8rem; }
+      .criteria-grid { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+      .cards-grid { grid-template-columns: repeat(2, 1fr); }
+      .podium-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      nav { padding: 0 1rem; }
       .nav-links { gap: 1.25rem; }
-      .hero { padding: 3.5rem 1.25rem 3rem; }
-      .featured, .recent { padding: 2.5rem 1.25rem; }
-      .card-header, .score-breakdown, .card-body { padding-left: 1.25rem; padding-right: 1.25rem; }
-      .criterion {
-        grid-template-columns: 130px 1fr 48px;
-        gap: 0.5rem;
-      }
-      .criterion-name { font-size: 0.82rem; }
+      .hero-strip { padding: 1.75rem 1rem; }
+      .hero-inner { grid-template-columns: 1fr; gap: 0; }
+      .hero-stat::after { display: none; }
+      .hero-stat { padding: 0.75rem 1rem; }
+      .hero-stat-number { font-size: 3rem; }
+      .criteria-grid { grid-template-columns: 1fr 1fr; }
       .cards-grid { grid-template-columns: 1fr; }
-      .footer { padding: 2rem 1.25rem; }
+      .reviews-section, .scoring-section, .leaderboard { padding: 2rem 1rem; }
     }
   </style>
 </head>
 <body>
 
   <!-- NAV -->
-  <nav class="nav">
+  <nav>
     <a href="/" class="nav-logo">School Board Review</a>
     <ul class="nav-links">
-      <li><a href="/">Reviews</a></li>
-      <li><a href="/about.html">Methodology</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#how-we-score">How We Score</a></li>
       <li><a href="/about.html">About</a></li>
     </ul>
   </nav>
 
-  <!-- HERO -->
-  <section class="hero">
+  <!-- HERO STAT STRIP -->
+  <div class="hero-strip">
     <div class="hero-inner">
-      <h1>Public boards. Public meetings.<br><em>Public governance — reviewed.</em></h1>
-      <p>School Board Review analyzes public school board meetings against five governance criteria. Every review is based on publicly available meeting minutes and recordings.</p>
-      <a href="#reviews" class="btn-primary">See Our Reviews →</a>
+      <div class="hero-stat">
+        <span class="hero-stat-number">247</span>
+        <span class="hero-stat-label">Districts Reviewed</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-number">52<span style="font-size:2rem;">/100</span></span>
+        <span class="hero-stat-label">Average Governance Score</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-number">5</span>
+        <span class="hero-stat-label">Criteria Assessed</span>
+      </div>
     </div>
-  </section>
+  </div>
 
-  <!-- FEATURED REVIEW -->
-  <section class="featured" id="reviews">
-    <div style="max-width:780px;margin:0 auto;">
-      <p class="section-label">Featured Review</p>
-      <div class="review-card">
-        <div class="card-header">
-          <div class="score-badge">Composite Score: 62 / 100</div>
-          <h2>Governance Review: Jefferson Unified School District — May 2026 Regular Meeting</h2>
-          <p class="review-date">June 15, 2026</p>
-        </div>
-
-        <div class="score-breakdown">
-          <h3>Score Breakdown</h3>
-
-          <div class="criterion">
-            <span class="criterion-name">Focus Mindset</span>
-            <div class="bar-track"><div class="bar-fill" style="width:40%"></div></div>
-            <span class="criterion-score">8 / 20</span>
-          </div>
-          <div class="criterion">
-            <span class="criterion-name">Clarify Priorities</span>
-            <div class="bar-track"><div class="bar-fill" style="width:60%"></div></div>
-            <span class="criterion-score">12 / 20</span>
-          </div>
-          <div class="criterion">
-            <span class="criterion-name">Monitor Progress</span>
-            <div class="bar-track"><div class="bar-fill" style="width:75%"></div></div>
-            <span class="criterion-score">15 / 20</span>
-          </div>
-          <div class="criterion">
-            <span class="criterion-name">Align Resources</span>
-            <div class="bar-track"><div class="bar-fill" style="width:70%"></div></div>
-            <span class="criterion-score">14 / 20</span>
-          </div>
-          <div class="criterion">
-            <span class="criterion-name">Communicate Results</span>
-            <div class="bar-track"><div class="bar-fill" style="width:65%"></div></div>
-            <span class="criterion-score">13 / 20</span>
+  <!-- HOW SCORING WORKS -->
+  <section class="scoring-section" id="how-we-score">
+    <div class="scoring-inner">
+      <div class="section-header">
+        <h2 class="section-title">How We Score</h2>
+        <div class="section-rule"></div>
+        <span style="font-size:0.78rem;color:var(--text-muted);white-space:nowrap;">20 pts each &middot; 100 pt total</span>
+      </div>
+      <div class="criteria-grid">
+        <div class="criterion-block">
+          <div class="criterion-num">1</div>
+          <div class="criterion-info">
+            <div class="criterion-name-sm">Focus Mindset</div>
+            <div class="criterion-pts">Max 20 pts</div>
           </div>
         </div>
-
-        <div class="card-body">
-          <p>Jefferson Unified's May meeting showed genuine strength in outcome monitoring — 40% of substantive agenda time was devoted to reviewing district-wide reading data. However, the board's decision to take a vote on a vendor contract recommendation from the superintendent without discussing how it aligned with stated outcome priorities represents a recurring governance-management confusion.</p>
-          <a href="reviews/jefferson-unified-may-2026.html" class="read-more">Read Full Review →</a>
+        <div class="criterion-block">
+          <div class="criterion-num">2</div>
+          <div class="criterion-info">
+            <div class="criterion-name-sm">Clarify Priorities</div>
+            <div class="criterion-pts">Max 20 pts</div>
+          </div>
+        </div>
+        <div class="criterion-block">
+          <div class="criterion-num">3</div>
+          <div class="criterion-info">
+            <div class="criterion-name-sm">Monitor Progress</div>
+            <div class="criterion-pts">Max 20 pts</div>
+          </div>
+        </div>
+        <div class="criterion-block">
+          <div class="criterion-num">4</div>
+          <div class="criterion-info">
+            <div class="criterion-name-sm">Align Resources</div>
+            <div class="criterion-pts">Max 20 pts</div>
+          </div>
+        </div>
+        <div class="criterion-block">
+          <div class="criterion-num">5</div>
+          <div class="criterion-info">
+            <div class="criterion-name-sm">Communicate Results</div>
+            <div class="criterion-pts">Max 20 pts</div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- RECENT REVIEWS -->
-  <section class="recent">
-    <div class="recent-inner">
-      <h2>Recent Reviews</h2>
+  <section class="reviews-section" id="reviews">
+    <div class="reviews-inner">
+      <div class="section-header" style="margin-bottom:1.25rem;">
+        <h2 class="section-title">Recent Reviews</h2>
+        <div class="section-rule"></div>
+      </div>
+
       <div class="cards-grid">
 
-        <div class="mini-card">
-          <div class="score-badge">48 / 100</div>
-          <h3>Riverside USD — April 2026 Regular Meeting</h3>
-          <p class="review-date">May 28, 2026</p>
-          <p>An agenda dominated by operational approvals and a 2-minute community input process that produced no board response. Strong on compliance, weak on governance.</p>
-          <a href="#" class="read-more">Read Full Review →</a>
+        <!-- Mesa USD — 71 -->
+        <div class="district-card">
+          <div class="card-top">
+            <div class="district-name">Mesa USD</div>
+            <div class="state-badge">AZ</div>
+          </div>
+          <div class="card-score-row">
+            <div class="composite-score score-green">71</div>
+            <div class="score-meta">
+              <span class="score-denom">out of 100</span>
+              <span class="score-tier tier-green">Strong</span>
+            </div>
+          </div>
+          <div class="card-criteria">
+            <div class="mini-bar-row">
+              <span class="mini-label">Focus Mindset</span>
+              <div class="score-bar-track"><div class="score-bar-fill score-high" style="width:85%"></div></div>
+              <span class="mini-score-num score-green">17</span>
+            </div>
+            <div class="mini-bar-row">
+              <span class="mini-label">Clarify Priorities</span>
+              <div class="score-bar-track"><div class="score-bar-fill score-high" style="width:80%"></div></div>
+              <span class="mini-score-num score-green">16</span>
+            </div>
+            <div class="mini-bar-row">
+              <span class="mini-label">Monitor Progress</span>
+              <div class="score-bar-track"><div class="score-bar-fill score-mid" style="width:55%"></div></div>
+              <span class="mini-score-num score-orange">11</span>
+            </div>
+            <div class="mini-bar-row">
+              <span class="mini-label">Align Resources</span>
+              <div class="score-bar-track"><div class="score-bar-fill score-mid" style="width:65%"></div></div>
+              <span class="mini-score-num score-orange">13</span>
+            </div>
+            <div class="mini-bar-row">
+              <span class="mini-label">Communicate Results</span>
+              <div class="score-bar-track"><div class="score-bar-fill score-low" style="width:35%"></div></div>
+              <span class="mini-score-num score-red">7</span>
+            </div>
+          </div>
+          <div class="card-footer">
+            <span class="meeting-date">May 14, 2026</span>
+            <a href="#" class="read-more">Read full review &rarr;</a>
+          </div>
         </div>
 
-        <div class="mini-card">
-          <div class="score-badge">71 / 100</div>
-          <h3>Northside ISD — May 2026 Regular Meeting</h3>
-          <p class="review-date">June 10, 2026</p>
-          <p>Strong goal-clarity section, meaningful monitoring conversation — weakened by a 45-minute facilities discussion with no connection to student outcomes.</p>
-          <a href="#" class="read-more">Read Full Review →</a>
+        <!-- Jefferson City SD — 44 -->
+        <div class="district-card">
+          <div class="card-top">
+            <div class="district-name">Jefferson City SD</div>
+            <div class="state-badge">MO</div>
+          </div>
+          <div class="card-score-row">
+            <div class="composite-score score-red">44</div>
+            <div class="score-meta">
+              <span class="score-denom">out of 100</span>
+              <span class="score-tier tier-red">Needs Work</span>
+            </div>
+          </div>
+          <div class="card-criteria">
+            <div class="mini-bar-row">
+              <span class="mini-label">Focus Mindset</span>
+              <div class="score-bar-track"><div class="score-bar-fill score-mid" style="width:50%"></div></div>
+              <span class="mini-score-num score-orange">10</span>
+            </div>
+            <div class="mini-bar-row">
+              <span class="mini-label">Clarify Priorities</span>
+              <div class="score-bar-track"><div class="score-bar-fill score-low" style="width:30%"></div></div>
+              <span class="mini-score-num score-red">6</span>
+            </div>
+            <div class="mini-bar-row">
+              <span class="mini-label">Monitor Progress</span>
+              <div class="score-bar-track"><div class="score-bar-fill score-low" style="width:40%"></div></div>
+              <span class="mini-score-num score-red">8</span>
+            </div>
+            <div class="mini-bar-row">
+              <span class="mini-label">Align Resources</span>
+              <div class="score-bar-track"><div class="score-bar-fill score-mid" style="width:55%"></div></div>
+              <span class="mini-score-num score-orange">11</span>
+            </div>
+            <div class="mini-bar-row">
+              <span class="mini-label">Communicate Results</span>
+              <div class="score-bar-track"><div class="score-bar-fill score-low" style="width:45%"></div></div>
+              <span class="mini-score-num score-red">9</span>
+            </div>
+          </div>
+          <div class="card-footer">
+            <span class="meeting-date">May 20, 2026</span>
+            <a href="#" class="read-more">Read full review &rarr;</a>
+          </div>
         </div>
 
+        <!-- Fairview ISD — 83 -->
+        <div class="district-card">
+          <div class="card-top">
+            <div class="district-name">Fairview ISD</div>
+            <div class="state-badge">TX</div>
+          </div>
+          <div class="card-score-row">
+            <div class="composite-score score-green">83</div>
+            <div class="score-meta">
+              <span class="score-denom">out of 100</span>
+              <span class="score-tier tier-green">Exemplary</span>
+            </div>
+          </div>
+          <div class="card-criteria">
+            <div class="mini-bar-row">
+              <span class="mini-label">Focus Mindset</span>
+              <div class="score-bar-track"><div class="score-bar-fill score-high" style="width:90%"></div></div>
+              <span class="mini-score-num score-green">18</span>
+            </div>
+            <div class="mini-bar-row">
+              <span class="mini-label">Clarify Priorities</span>
+              <div class="score-bar-track"><div class="score-bar-fill score-high" style="width:85%"></div></div>
+              <span class="mini-score-num score-green">17</span>
+            </div>
+            <div class="mini-bar-row">
+              <span class="mini-label">Monitor Progress</span>
+              <div class="score-bar-track"><div class="score-bar-fill score-high" style="width:80%"></div></div>
+              <span class="mini-score-num score-green">16</span>
+            </div>
+            <div class="mini-bar-row">
+              <span class="mini-label">Align Resources</span>
+              <div class="score-bar-track"><div class="score-bar-fill score-high" style="width:80%"></div></div>
+              <span class="mini-score-num score-green">16</span>
+            </div>
+            <div class="mini-bar-row">
+              <span class="mini-label">Communicate Results</span>
+              <div class="score-bar-track"><div class="score-bar-fill score-high" style="width:80%"></div></div>
+              <span class="mini-score-num score-green">16</span>
+            </div>
+          </div>
+          <div class="card-footer">
+            <span class="meeting-date">May 11, 2026</span>
+            <a href="#" class="read-more">Read full review &rarr;</a>
+          </div>
+        </div>
+
+        <!-- Cleveland Metro SD — 38 -->
+        <div class="district-card">
+          <div class="card-top">
+            <div class="district-name">Cleveland Metro SD</div>
+            <div class="state-badge">OH</div>
+          </div>
+          <div class="card-score-row">
+            <div class="composite-score score-red">38</div>
+            <div class="score-meta">
+              <span class="score-denom">out of 100</span>
+              <span class="score-tier tier-red">Critical</span>
+            </div>
+          </div>
+          <div class="card-criteria">
+            <div class="mini-bar-row">
+              <span class="mini-label">Focus Mindset</span>
+              <div class="score-bar-track"><div class="score-bar-fill score-low" style="width:40%"></div></div>
+              <span class="mini-score-num score-red">8</span>
+            </div>
+            <div class="mini-bar-row">
+              <span class="mini-label">Clarify Priorities</span>
+              <div class="score-bar-track"><div class="score-bar-fill score-low" style="width:30%"></div></div>
+              <span class="mini-score-num score-red">6</span>
+            </div>
+            <div class="mini-bar-row">
+              <span class="mini-label">Monitor Progress</span>
+              <div class="score-bar-track"><div class="score-bar-fill score-low" style="width:35%"></div></div>
+              <span class="mini-score-num score-red">7</span>
+            </div>
+            <div class="mini-bar-row">
+              <span class="mini-label">Align Resources</span>
+              <div class="score-bar-track"><div class="score-bar-fill score-mid" style="width:50%"></div></div>
+              <span class="mini-score-num score-orange">10</span>
+            </div>
+            <div class="mini-bar-row">
+              <span class="mini-label">Communicate Results</span>
+              <div class="score-bar-track"><div class="score-bar-fill score-low" style="width:35%"></div></div>
+              <span class="mini-score-num score-red">7</span>
+            </div>
+          </div>
+          <div class="card-footer">
+            <span class="meeting-date">May 27, 2026</span>
+            <a href="#" class="read-more">Read full review &rarr;</a>
+          </div>
+        </div>
+
+        <!-- Bellevue SD — 78 -->
+        <div class="district-card">
+          <div class="card-top">
+            <div class="district-name">Bellevue SD</div>
+            <div class="state-badge">WA</div>
+          </div>
+          <div class="card-score-row">
+            <div class="composite-score score-green">78</div>
+            <div class="score-meta">
+              <span class="score-denom">out of 100</span>
+              <span class="score-tier tier-green">Strong</span>
+            </div>
+          </div>
+          <div class="card-criteria">
+            <div class="mini-bar-row">
+              <span class="mini-label">Focus Mindset</span>
+              <div class="score-bar-track"><div class="score-bar-fill score-high" style="width:90%"></div></div>
+              <span class="mini-score-num score-green">18</span>
+            </div>
+            <div class="mini-bar-row">
+              <span class="mini-label">Clarify Priorities</span>
+              <div class="score-bar-track"><div class="score-bar-fill score-high" style="width:85%"></div></div>
+              <span class="mini-score-num score-green">17</span>
+            </div>
+            <div class="mini-bar-row">
+              <span class="mini-label">Monitor Progress</span>
+              <div class="score-bar-track"><div class="score-bar-fill score-high" style="width:75%"></div></div>
+              <span class="mini-score-num score-green">15</span>
+            </div>
+            <div class="mini-bar-row">
+              <span class="mini-label">Align Resources</span>
+              <div class="score-bar-track"><div class="score-bar-fill score-mid" style="width:60%"></div></div>
+              <span class="mini-score-num score-orange">12</span>
+            </div>
+            <div class="mini-bar-row">
+              <span class="mini-label">Communicate Results</span>
+              <div class="score-bar-track"><div class="score-bar-fill score-high" style="width:80%"></div></div>
+              <span class="mini-score-num score-green">16</span>
+            </div>
+          </div>
+          <div class="card-footer">
+            <span class="meeting-date">June 3, 2026</span>
+            <a href="#" class="read-more">Read full review &rarr;</a>
+          </div>
+        </div>
+
+        <!-- Birmingham City Schools — 29 -->
+        <div class="district-card">
+          <div class="card-top">
+            <div class="district-name">Birmingham City Schools</div>
+            <div class="state-badge">AL</div>
+          </div>
+          <div class="card-score-row">
+            <div class="composite-score score-red">29</div>
+            <div class="score-meta">
+              <span class="score-denom">out of 100</span>
+              <span class="score-tier tier-red">Critical</span>
+            </div>
+          </div>
+          <div class="card-criteria">
+            <div class="mini-bar-row">
+              <span class="mini-label">Focus Mindset</span>
+              <div class="score-bar-track"><div class="score-bar-fill score-low" style="width:30%"></div></div>
+              <span class="mini-score-num score-red">6</span>
+            </div>
+            <div class="mini-bar-row">
+              <span class="mini-label">Clarify Priorities</span>
+              <div class="score-bar-track"><div class="score-bar-fill score-low" style="width:25%"></div></div>
+              <span class="mini-score-num score-red">5</span>
+            </div>
+            <div class="mini-bar-row">
+              <span class="mini-label">Monitor Progress</span>
+              <div class="score-bar-track"><div class="score-bar-fill score-low" style="width:30%"></div></div>
+              <span class="mini-score-num score-red">6</span>
+            </div>
+            <div class="mini-bar-row">
+              <span class="mini-label">Align Resources</span>
+              <div class="score-bar-track"><div class="score-bar-fill score-low" style="width:35%"></div></div>
+              <span class="mini-score-num score-red">7</span>
+            </div>
+            <div class="mini-bar-row">
+              <span class="mini-label">Communicate Results</span>
+              <div class="score-bar-track"><div class="score-bar-fill score-low" style="width:25%"></div></div>
+              <span class="mini-score-num score-red">5</span>
+            </div>
+          </div>
+          <div class="card-footer">
+            <span class="meeting-date">June 10, 2026</span>
+            <a href="#" class="read-more">Read full review &rarr;</a>
+          </div>
+        </div>
+
+      </div><!-- /cards-grid -->
+    </div>
+  </section>
+
+  <!-- LEADERBOARD STRIP -->
+  <section class="leaderboard">
+    <div class="leaderboard-inner">
+      <div class="section-header" style="margin-bottom:1.25rem;">
+        <h2 class="section-title">Highest Scoring Districts This Month</h2>
+        <div class="section-rule"></div>
+      </div>
+      <div class="podium-grid">
+        <div class="podium-card">
+          <div class="podium-rank gold">#1</div>
+          <div class="podium-info">
+            <div class="podium-district">Fairview ISD</div>
+            <div class="podium-score">83 / 100 &mdash; Exemplary</div>
+          </div>
+          <div class="state-badge">TX</div>
+        </div>
+        <div class="podium-card">
+          <div class="podium-rank silver">#2</div>
+          <div class="podium-info">
+            <div class="podium-district">Bellevue SD</div>
+            <div class="podium-score">78 / 100 &mdash; Strong</div>
+          </div>
+          <div class="state-badge">WA</div>
+        </div>
+        <div class="podium-card">
+          <div class="podium-rank bronze">#3</div>
+          <div class="podium-info">
+            <div class="podium-district">Mesa USD</div>
+            <div class="podium-score">71 / 100 &mdash; Strong</div>
+          </div>
+          <div class="state-badge">AZ</div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- FOOTER -->
-  <footer class="footer">
-    <p class="footer-logo">School Board Review</p>
-    <p>Public meetings, publicly reviewed.</p>
-    <p>Governance reviews based on public records only. Methodology at <a href="/about.html" style="color:rgba(255,255,255,0.72);text-decoration:underline;">schoolboardreview.com/about</a></p>
-    <p style="margin-top:0.75rem;">© 2026 School Board Review</p>
+  <footer>
+    <div class="footer-logo">School Board Review</div>
+    <p>Holding governance accountable, one meeting at a time.</p>
+    <p style="margin-top:0.5rem;">Reviews based on public records only &middot; <a href="/about.html" style="color:rgba(255,255,255,0.65);text-decoration:underline;">Methodology</a> &middot; &copy; 2026 School Board Review</p>
   </footer>
 
 </body>
