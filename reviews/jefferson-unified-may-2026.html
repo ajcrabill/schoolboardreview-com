@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jefferson Unified School District — May 2026 Review | School Board Review</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --purple:       #553C7B;
+      --white:        #FFFFFF;
+      --lavender:     #E8E0F5;
+      --dark-purple:  #3A2857;
+      --pale-lavender:#F5F0FF;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      color: #1a1a2e;
+      background: var(--white);
+    }
+
+    /* ── NAV ── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--dark-purple);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+    }
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.25rem;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.82);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--white); }
+
+    /* ── REVIEW HEADER ── */
+    .review-header {
+      background: var(--dark-purple);
+      padding: 3.5rem 2rem 3rem;
+    }
+    .review-header-inner {
+      max-width: 780px;
+      margin: 0 auto;
+    }
+    .pub-name {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 0.6rem;
+    }
+    .review-type-tag {
+      display: inline-block;
+      background: rgba(232,224,245,0.18);
+      border: 1px solid rgba(232,224,245,0.35);
+      color: var(--lavender);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.75rem;
+      border-radius: 3px;
+      margin-bottom: 1.1rem;
+    }
+    .review-header h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.6rem, 4vw, 2.25rem);
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+    .review-header .meeting-label {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.65);
+      font-weight: 300;
+      margin-bottom: 1.25rem;
+    }
+    .review-meta {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.75rem;
+    }
+    .review-meta span {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.55);
+    }
+    .review-meta span strong {
+      color: rgba(255,255,255,0.78);
+      font-weight: 500;
+    }
+    .composite-score {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      background: rgba(255,255,255,0.08);
+      border: 2px solid rgba(232,224,245,0.3);
+      border-radius: 10px;
+      padding: 1.1rem 1.75rem;
+      min-width: 140px;
+    }
+    .composite-score .score-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 0.35rem;
+    }
+    .composite-score .score-number {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.5rem;
+      color: var(--white);
+      line-height: 1;
+    }
+    .composite-score .score-denom {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.45);
+      font-weight: 300;
+      margin-top: 0.15rem;
+    }
+
+    /* ── SCORE BREAKDOWN ── */
+    .score-breakdown {
+      background: var(--pale-lavender);
+      padding: 2.5rem 2rem;
+      border-bottom: 1px solid #e2daea;
+    }
+    .score-breakdown-inner {
+      max-width: 780px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 1.5rem;
+    }
+    .criterion-row {
+      display: grid;
+      grid-template-columns: 170px 1fr 52px;
+      align-items: start;
+      gap: 0.75rem 1rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(85,60,123,0.1);
+    }
+    .criterion-row:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    .criterion-left {
+      padding-top: 2px;
+    }
+    .criterion-name {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--dark-purple);
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+    .criterion-center {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .bar-track {
+      height: 8px;
+      background: rgba(85,60,123,0.15);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 6px;
+    }
+    .bar-fill {
+      height: 100%;
+      background: var(--purple);
+      border-radius: 4px;
+    }
+    .criterion-note {
+      font-size: 0.82rem;
+      color: #5a5075;
+      line-height: 1.55;
+    }
+    .criterion-score {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--purple);
+      text-align: right;
+      padding-top: 4px;
+      white-space: nowrap;
+    }
+
+    /* ── REVIEW BODY ── */
+    .review-body {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .review-section {
+      padding: 2.5rem 0;
+      border-bottom: 1px solid #e8e2f0;
+    }
+    .review-section:last-of-type { border-bottom: none; }
+
+    .review-section h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.35rem;
+      color: var(--dark-purple);
+      margin-bottom: 1rem;
+    }
+    .review-section p {
+      font-size: 0.975rem;
+      line-height: 1.8;
+      color: #2d2540;
+      margin-bottom: 0.9rem;
+    }
+    .review-section p:last-child { margin-bottom: 0; }
+
+    /* Strengths / Issues */
+    .highlight-box {
+      background: var(--pale-lavender);
+      border-left: 3px solid var(--purple);
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: #2d2540;
+    }
+    .highlight-box:last-child { margin-bottom: 0; }
+    .highlight-box strong {
+      color: var(--dark-purple);
+      font-weight: 600;
+      display: block;
+      margin-bottom: 0.25rem;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Recommendation */
+    .recommendation-box {
+      background: var(--dark-purple);
+      color: var(--white);
+      border-radius: 8px;
+      padding: 1.75rem;
+      margin-top: 0.5rem;
+    }
+    .recommendation-box .rec-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--lavender);
+      opacity: 0.75;
+      margin-bottom: 0.75rem;
+    }
+    .recommendation-box p {
+      font-size: 0.95rem;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 0;
+    }
+
+    /* Takeaway */
+    .takeaway-box {
+      background: var(--lavender);
+      border-radius: 8px;
+      padding: 1.75rem;
+      margin-top: 0.5rem;
+    }
+    .takeaway-box .tak-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--purple);
+      opacity: 0.8;
+      margin-bottom: 0.75rem;
+    }
+    .takeaway-box p {
+      font-size: 0.975rem;
+      line-height: 1.8;
+      color: var(--dark-purple);
+      font-style: italic;
+      font-family: 'DM Serif Display', serif;
+      margin-bottom: 0;
+    }
+
+    /* Disclaimer */
+    .disclaimer {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 2rem 2rem 3.5rem;
+    }
+    .disclaimer p {
+      font-size: 0.8rem;
+      line-height: 1.7;
+      color: #8a82a0;
+      font-style: italic;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: var(--dark-purple);
+      color: rgba(255,255,255,0.72);
+      padding: 2.5rem 2rem;
+      text-align: center;
+    }
+    .footer-logo {
+      font-family: 'DM Serif Display', serif;
+      color: var(--white);
+      font-size: 1.1rem;
+      margin-bottom: 0.6rem;
+    }
+    .footer p {
+      font-size: 0.82rem;
+      line-height: 1.7;
+      max-width: 560px;
+      margin: 0 auto 0.4rem;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav { padding: 0 1rem; }
+      .nav-links { gap: 1.25rem; }
+      .review-header { padding: 2.5rem 1.25rem 2rem; }
+      .score-breakdown { padding: 2rem 1.25rem; }
+      .review-body { padding: 0 1.25rem; }
+      .disclaimer { padding: 1.5rem 1.25rem 3rem; }
+      .criterion-row {
+        grid-template-columns: 130px 1fr 44px;
+        gap: 0.5rem 0.75rem;
+      }
+      .criterion-name { font-size: 0.82rem; }
+      .footer { padding: 2rem 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="/" class="nav-logo">School Board Review</a>
+    <ul class="nav-links">
+      <li><a href="/">Reviews</a></li>
+      <li><a href="/about.html">Methodology</a></li>
+      <li><a href="/about.html">About</a></li>
+    </ul>
+  </nav>
+
+  <!-- REVIEW HEADER -->
+  <header class="review-header">
+    <div class="review-header-inner">
+      <p class="pub-name">School Board Review</p>
+      <div class="review-type-tag">Governance Review</div>
+      <h1>Jefferson Unified School District</h1>
+      <p class="meeting-label">May 2026 Regular Board Meeting</p>
+      <div class="review-meta">
+        <span><strong>Source:</strong> Publicly available meeting minutes</span>
+        <span><strong>Published:</strong> June 15, 2026</span>
+      </div>
+      <div class="composite-score">
+        <span class="score-label">Composite Score</span>
+        <span class="score-number">62</span>
+        <span class="score-denom">out of 100</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- SCORE BREAKDOWN -->
+  <section class="score-breakdown">
+    <div class="score-breakdown-inner">
+      <p class="section-label">Score Breakdown</p>
+
+      <div class="criterion-row">
+        <div class="criterion-left">
+          <span class="criterion-name">Focus Mindset</span>
+        </div>
+        <div class="criterion-center">
+          <div class="bar-track"><div class="bar-fill" style="width:40%"></div></div>
+          <span class="criterion-note">Meeting opened with 20 minutes of recognition ceremonies before substantive business; limited evidence of explicit student outcome framing throughout.</span>
+        </div>
+        <span class="criterion-score">8 / 20</span>
+      </div>
+
+      <div class="criterion-row">
+        <div class="criterion-left">
+          <span class="criterion-name">Clarify Priorities</span>
+        </div>
+        <div class="criterion-center">
+          <div class="bar-track"><div class="bar-fill" style="width:60%"></div></div>
+          <span class="criterion-note">Board referenced district goals on three occasions; goals are present but not consistently anchored to specific outcome targets.</span>
+        </div>
+        <span class="criterion-score">12 / 20</span>
+      </div>
+
+      <div class="criterion-row">
+        <div class="criterion-left">
+          <span class="criterion-name">Monitor Progress</span>
+        </div>
+        <div class="criterion-center">
+          <div class="bar-track"><div class="bar-fill" style="width:75%"></div></div>
+          <span class="criterion-note">Strongest section: 40% of substantive agenda time devoted to district reading data review; board asked substantive follow-up questions.</span>
+        </div>
+        <span class="criterion-score">15 / 20</span>
+      </div>
+
+      <div class="criterion-row">
+        <div class="criterion-left">
+          <span class="criterion-name">Align Resources</span>
+        </div>
+        <div class="criterion-center">
+          <div class="bar-track"><div class="bar-fill" style="width:70%"></div></div>
+          <span class="criterion-note">Budget amendment approved with reference to strategic plan; two contracts approved without explicit outcome alignment discussion.</span>
+        </div>
+        <span class="criterion-score">14 / 20</span>
+      </div>
+
+      <div class="criterion-row">
+        <div class="criterion-left">
+          <span class="criterion-name">Communicate Results</span>
+        </div>
+        <div class="criterion-center">
+          <div class="bar-track"><div class="bar-fill" style="width:65%"></div></div>
+          <span class="criterion-note">Community input process allowed but board did not respond to public comments; no explicit outcome communication to the public during the meeting.</span>
+        </div>
+        <span class="criterion-score">13 / 20</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- REVIEW BODY -->
+  <article class="review-body">
+
+    <div class="review-section">
+      <h2>Strengths</h2>
+      <p>Jefferson Unified's May meeting showed genuine strength in outcome monitoring. The reading data segment was not perfunctory — it was substantive. Board members asked specific follow-up questions rather than simply acknowledging the presentation and moving on: they probed the distribution of gains across school sites, asked about the performance of English learners relative to overall trends, and requested a follow-up report on intervention program reach.</p>
+      <p>This is not nothing. Many boards receive data reports as passive audience members, nodding through slides before returning to the consent calendar. Jefferson's board engaged. The questions were the right kind — they connected data to decisions, even if that connection was not fully extended to the evening's other agenda items.</p>
+      <p>The budget amendment approvals also showed more governance awareness than typical: the staff memo linked the reallocation to the district's written strategic plan, and at least one board member verbally confirmed that linkage before voting.</p>
+    </div>
+
+    <div class="review-section">
+      <h2>Areas for Improvement</h2>
+
+      <div class="highlight-box">
+        <strong>Issue 1 — Vendor contract vote without outcome alignment discussion</strong>
+        The board approved a tutoring services contract on a superintendent recommendation without any discussion of how it connected to the district's stated reading goals. The same board that spent 40 minutes engaging with reading data did not ask — before spending money on a tutoring vendor — which reading goal the vendor served, which students would be prioritized, or how progress would be measured. The contract was treated as an administrative approval rather than a governance decision. That inconsistency is the core gap in this meeting.
+      </div>
+
+      <div class="highlight-box">
+        <strong>Issue 2 — Recognition ceremonies displaced substantive opening</strong>
+        The first 20 minutes of the meeting were devoted to student recognition and staff appreciation ceremonies. These are not inherently wrong — community acknowledgment has a place in public governance. But placing them at the very top of the agenda, before any student outcome framing, signals (however unintentionally) that the board's primary purpose is celebration rather than stewardship. A brief reordering — or even a short outcome-framing statement before the ceremonies — would shift that signal.
+      </div>
+    </div>
+
+    <div class="review-section">
+      <h2>One Specific Recommendation</h2>
+      <div class="recommendation-box">
+        <p class="rec-label">Structural Change</p>
+        <p>Before any vendor contract comes to a board vote, require the superintendent to include in the agenda packet: (a) which specific student outcome goal this contract serves, and (b) how progress toward that goal will be monitored over the contract period. This is a one-page addition to any staff memo. It takes minutes to write and requires no additional board meeting time. But it closes the single most significant governance gap observed in this meeting — the disconnect between what the board knows about outcomes and what it funds. This structural change would also create a record: over time, the board and community could audit whether funded vendors actually moved the goals they were hired to serve.</p>
+      </div>
+    </div>
+
+    <div class="review-section">
+      <h2>Governance Takeaway</h2>
+      <div class="takeaway-box">
+        <p class="tak-label">What All Boards Can Learn</p>
+        <p>Monitoring without decision-making alignment is incomplete governance. Jefferson Unified demonstrates that a board can be strong on receiving data and still disconnect that data from its purchasing decisions. The goal is integration — where what you know about outcomes shapes what you buy, what you fund, and what you prioritize. Data engagement is the first half of the work. The second half is letting that data govern.</p>
+      </div>
+    </div>
+
+  </article>
+
+  <!-- DISCLAIMER -->
+  <div class="disclaimer">
+    <p>This review is based on publicly available meeting minutes and represents the analytical assessment of the School Board Review editorial team. Jefferson Unified School District is used as an illustrative composite and does not represent a specific actual district. Meeting details are constructed for illustrative purposes.</p>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p class="footer-logo">School Board Review</p>
+    <p>Public meetings, publicly reviewed.</p>
+    <p>Governance reviews based on public records only. Methodology at <a href="/about.html" style="color:rgba(255,255,255,0.72);text-decoration:underline;">schoolboardreview.com/about</a></p>
+    <p style="margin-top:0.75rem;">© 2026 School Board Review</p>
+  </footer>
+
+</body>
+</html>
