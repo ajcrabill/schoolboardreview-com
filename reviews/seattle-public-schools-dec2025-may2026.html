@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Seattle Public Schools — Dec 2025–May 2026 Governance Review | School Board Review</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'DM Sans',sans-serif;font-weight:400;color:#1a1a2e;background:#fff}
+    :root{--purple:#553C7B;--white:#fff;--lavender:#E8E0F5;--dark-purple:#3A2857;--pale-lavender:#F5F0FF}
+
+    .nav{position:sticky;top:0;z-index:100;background:#3A2857;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px;box-shadow:0 2px 12px rgba(0,0,0,.25)}
+    .nav-logo{font-family:'DM Serif Display',serif;font-size:1.25rem;color:#fff;text-decoration:none}
+    .nav-links{display:flex;gap:2rem;list-style:none}
+    .nav-links a{color:rgba(255,255,255,.82);text-decoration:none;font-size:.9rem;font-weight:500}
+
+    .review-header{background:#3A2857;padding:3.5rem 2rem 3rem}
+    .review-header-inner{max-width:780px;margin:0 auto}
+    .pub-name{font-size:.7rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.6rem}
+    .review-type-tag{display:inline-block;background:rgba(232,224,245,.18);border:1px solid rgba(232,224,245,.35);color:#E8E0F5;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .75rem;border-radius:3px;margin-bottom:.6rem}
+    .transcript-tag{display:inline-block;background:rgba(39,174,96,.2);border:1px solid rgba(39,174,96,.4);color:#7dffb3;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .75rem;border-radius:3px;margin-bottom:.6rem;margin-left:.5rem}
+    .review-header h1{font-family:'DM Serif Display',serif;font-size:clamp(1.6rem,4vw,2.25rem);color:#fff;line-height:1.2;margin-bottom:.5rem}
+    .meeting-label{font-size:1rem;color:rgba(255,255,255,.65);font-weight:300;margin-bottom:1.25rem}
+    .review-meta{display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:1.75rem}
+    .review-meta span{font-size:.82rem;color:rgba(255,255,255,.55)}
+    .review-meta span strong{color:rgba(255,255,255,.78);font-weight:500}
+
+    .composite-score{display:inline-flex;flex-direction:column;align-items:center;background:rgba(255,255,255,.08);border:2px solid rgba(232,224,245,.3);border-radius:10px;padding:1.1rem 1.75rem;min-width:140px}
+    .composite-score .score-label{font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:.35rem}
+    .composite-score .score-number{font-family:'DM Serif Display',serif;font-size:2.5rem;color:#fff;line-height:1}
+    .composite-score .score-denom{font-size:.85rem;color:rgba(255,255,255,.45);font-weight:300;margin-top:.15rem}
+    .composite-score .score-tier-label{font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#f0a0a0;margin-top:.35rem}
+
+    /* time use strip */
+    .time-use-strip{background:#2e1f47;border-top:1px solid rgba(255,255,255,.08);padding:1.25rem 2rem}
+    .time-use-inner{max-width:780px;margin:0 auto;display:flex;gap:2.5rem;flex-wrap:wrap;align-items:center}
+    .time-stat{display:flex;flex-direction:column}
+    .time-stat-num{font-family:'DM Serif Display',serif;font-size:1.6rem;color:#fff;line-height:1}
+    .time-stat-label{font-size:.72rem;color:rgba(255,255,255,.5);margin-top:.2rem;font-weight:500}
+    .time-use-note{font-size:.8rem;color:rgba(255,255,255,.45);font-style:italic;flex:1;min-width:200px;line-height:1.55}
+
+    .score-breakdown{background:#F5F0FF;padding:2.5rem 2rem;border-bottom:1px solid #e2daea}
+    .score-breakdown-inner{max-width:780px;margin:0 auto}
+    .section-label{font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#553C7B;margin-bottom:1.5rem}
+    .criterion-row{display:grid;grid-template-columns:170px 1fr 52px;align-items:start;gap:.75rem 1rem;margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid rgba(85,60,123,.1)}
+    .criterion-row:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
+    .criterion-name{font-size:.875rem;font-weight:600;color:#3A2857;display:block;margin-bottom:.25rem}
+    .criterion-center{display:flex;flex-direction:column;gap:.5rem}
+    .bar-track{height:8px;background:rgba(85,60,123,.15);border-radius:4px;overflow:hidden;margin-top:6px}
+    .bar-fill-green{height:100%;background:#27AE60;border-radius:4px}
+    .bar-fill-orange{height:100%;background:#F39C12;border-radius:4px}
+    .bar-fill-red{height:100%;background:#E74C3C;border-radius:4px}
+    .criterion-note{font-size:.82rem;color:#5a5075;line-height:1.55}
+    .criterion-score{font-size:.875rem;font-weight:700;color:#553C7B;text-align:right;padding-top:4px;white-space:nowrap}
+    .score-red-text{color:#E74C3C}
+    .score-orange-text{color:#F39C12}
+    .score-green-text{color:#27AE60}
+
+    .review-body{max-width:780px;margin:0 auto;padding:0 2rem}
+    .review-section{padding:2.5rem 0;border-bottom:1px solid #e8e2f0}
+    .review-section:last-of-type{border-bottom:none}
+    .review-section h2{font-family:'DM Serif Display',serif;font-size:1.35rem;color:#3A2857;margin-bottom:1rem}
+    .review-section p{font-size:.975rem;line-height:1.8;color:#2d2540;margin-bottom:.9rem}
+    .review-section p:last-child{margin-bottom:0}
+
+    .highlight-box{background:#F5F0FF;border-left:3px solid #553C7B;border-radius:0 6px 6px 0;padding:1rem 1.25rem;margin-bottom:1rem;font-size:.95rem;line-height:1.7;color:#2d2540}
+    .highlight-box strong{color:#3A2857;font-weight:600;display:block;margin-bottom:.25rem;font-size:.875rem;text-transform:uppercase;letter-spacing:.05em}
+
+    /* pull quote from transcript */
+    .transcript-quote{background:#fff;border:1px solid #e2daea;border-left:3px solid #27AE60;border-radius:0 6px 6px 0;padding:1rem 1.25rem;margin:1rem 0;font-size:.9rem;line-height:1.7;color:#2d2540}
+    .transcript-quote .quote-text{font-style:italic;color:#3A2857;margin-bottom:.35rem}
+    .transcript-quote .quote-source{font-size:.75rem;font-weight:600;color:#6B6580;letter-spacing:.04em;text-transform:uppercase}
+
+    .recommendation-box{background:#3A2857;color:#fff;border-radius:8px;padding:1.75rem;margin-top:.5rem}
+    .recommendation-box .rec-label{font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#E8E0F5;opacity:.75;margin-bottom:.75rem}
+    .recommendation-box p{font-size:.95rem;line-height:1.75;color:rgba(255,255,255,.85);margin-bottom:0}
+
+    .takeaway-box{background:#E8E0F5;border-radius:8px;padding:1.75rem;margin-top:.5rem}
+    .takeaway-box .tak-label{font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#553C7B;opacity:.8;margin-bottom:.75rem}
+    .takeaway-box p{font-size:.975rem;line-height:1.8;color:#3A2857;font-style:italic;font-family:'DM Serif Display',serif;margin-bottom:0}
+
+    /* score table */
+    .score-table{width:100%;border-collapse:collapse;font-size:.85rem;margin-top:1rem}
+    .score-table th{background:#3A2857;color:#fff;padding:.6rem .85rem;text-align:left;font-weight:600;font-size:.75rem;letter-spacing:.05em;text-transform:uppercase}
+    .score-table td{padding:.55rem .85rem;border-bottom:1px solid #e8e2f0;color:#2d2540;line-height:1.4}
+    .score-table tr:last-child td{border-bottom:none}
+    .score-table tr.area-row td{background:#F5F0FF;font-weight:600;color:#3A2857;font-size:.8rem}
+    .score-table tr.total-row td{background:#3A2857;color:#fff;font-weight:700}
+    .q-score{font-weight:700;text-align:right;white-space:nowrap}
+    .q-red{color:#E74C3C}
+    .q-orange{color:#F39C12}
+    .q-green{color:#27AE60}
+
+    .disclaimer{max-width:780px;margin:0 auto;padding:2rem 2rem 3.5rem}
+    .disclaimer p{font-size:.8rem;line-height:1.7;color:#8a82a0;font-style:italic}
+
+    .footer{background:#3A2857;color:rgba(255,255,255,.72);padding:2.5rem 2rem;text-align:center}
+    .footer-logo{font-family:'DM Serif Display',serif;color:#fff;font-size:1.1rem;margin-bottom:.6rem}
+    .footer p{font-size:.82rem;line-height:1.7;max-width:560px;margin:0 auto .4rem}
+
+    @media(max-width:768px){
+      .nav{padding:0 1rem}
+      .review-header{padding:2.5rem 1.25rem 2rem}
+      .time-use-strip{padding:1rem 1.25rem}
+      .time-use-inner{gap:1.5rem}
+      .score-breakdown{padding:2rem 1.25rem}
+      .review-body{padding:0 1.25rem}
+      .criterion-row{grid-template-columns:120px 1fr 44px;gap:.5rem .75rem}
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="/" class="nav-logo">School Board Review</a>
+  <ul class="nav-links">
+    <li><a href="/">Reviews</a></li>
+    <li><a href="/about.html">About</a></li>
+  </ul>
+</nav>
+
+<header class="review-header">
+  <div class="review-header-inner">
+    <p class="pub-name">School Board Review</p>
+    <span class="review-type-tag">Governance Review</span>
+    <span class="transcript-tag">&#10003; Verbatim Transcripts</span>
+    <h1>Seattle Public Schools</h1>
+    <p class="meeting-label">December 2025 – May 2026 &middot; 14 Meetings Reviewed</p>
+    <div class="review-meta">
+      <span><strong>State:</strong> Washington</span>
+      <span><strong>Source:</strong> Verbatim transcripts, transcripts.sps-by-the-numbers.com</span>
+      <span><strong>Published:</strong> June 2026</span>
+      <span><strong>Meetings:</strong> 14 (6 regular, 8 special)</span>
+    </div>
+    <div class="composite-score">
+      <span class="score-label">Composite Score</span>
+      <span class="score-number">40</span>
+      <span class="score-denom">out of 100</span>
+      <span class="score-tier-label">Governance fundamentals largely absent</span>
+    </div>
+  </div>
+</header>
+
+<div class="time-use-strip">
+  <div class="time-use-inner">
+    <div class="time-stat">
+      <span class="time-stat-num">16.9%</span>
+      <span class="time-stat-label">Goal-Focused Meeting Time</span>
+    </div>
+    <div class="time-stat">
+      <span class="time-stat-num">9 / 14</span>
+      <span class="time-stat-label">Meetings With 0% Goal Focus</span>
+    </div>
+    <div class="time-stat">
+      <span class="time-stat-num">Dec–Feb</span>
+      <span class="time-stat-label">Only Months With Goal Monitoring</span>
+    </div>
+    <p class="time-use-note">ESB target is &ge;50% goal-focused time. SPS concentrated all outcome monitoring in three special sessions in the first half of the review period; the second half of the period had zero dedicated monitoring across eight meetings.</p>
+  </div>
+</div>
+
+<section class="score-breakdown">
+  <div class="score-breakdown-inner">
+    <p class="section-label">Score Breakdown</p>
+
+    <div class="criterion-row">
+      <div><span class="criterion-name">Focus Mindset</span></div>
+      <div class="criterion-center">
+        <div class="bar-track"><div class="bar-fill-orange" style="width:55%"></div></div>
+        <span class="criterion-note">The board demonstrated genuine outcome orientation in special monitoring sessions, with directors anchoring discussion in named goals and requesting data disaggregations. However, this orientation was confined to four meetings — all specially called. Regular meetings showed no outcome focus.</span>
+      </div>
+      <span class="criterion-score score-orange-text">11 / 20</span>
+    </div>
+
+    <div class="criterion-row">
+      <div><span class="criterion-name">Clarify Priorities</span></div>
+      <div class="criterion-center">
+        <div class="bar-track"><div class="bar-fill-orange" style="width:65%"></div></div>
+        <span class="criterion-note">SPS's strongest area: three formally adopted student outcome goals (Policy 0020, Jan 2025) with metrics, timelines, and directional targets. Five guardrails adopted. Point losses reflect baselines not yet locked in the policy text and a guardrails reframing dispute that threatens measurability.</span>
+      </div>
+      <span class="criterion-score score-orange-text">13 / 20</span>
+    </div>
+
+    <div class="criterion-row">
+      <div><span class="criterion-name">Monitor Progress</span></div>
+      <div class="criterion-center">
+        <div class="bar-track"><div class="bar-fill-red" style="width:40%"></div></div>
+        <span class="criterion-note">The board held three substantive monitoring sessions (Dec, Jan, Feb) with genuine probing engagement. But monitoring was episodic — concentrated in the first half of the period, absent in the second. And when stalled data appeared, the board directed staff, not itself.</span>
+      </div>
+      <span class="criterion-score score-red-text">8 / 20</span>
+    </div>
+
+    <div class="criterion-row">
+      <div><span class="criterion-name">Align Resources</span></div>
+      <div class="criterion-center">
+        <div class="bar-track"><div class="bar-fill-red" style="width:20%"></div></div>
+        <span class="criterion-note">Budget discussions were dominated by a structural deficit crisis rather than goal-connected allocation. Only one of five qualifying major expenditures — the ELA curriculum adoption — had an explicit named-goal connection in deliberation. The remaining four were approved without outcome framing.</span>
+      </div>
+      <span class="criterion-score score-red-text">4 / 20</span>
+    </div>
+
+    <div class="criterion-row">
+      <div><span class="criterion-name">Communicate Results</span></div>
+      <div class="criterion-center">
+        <div class="bar-track"><div class="bar-fill-red" style="width:20%"></div></div>
+        <span class="criterion-note">The board engaged honestly with shortfall data when data appeared (honest reporting of the 4.6% Life Ready completion rate was exemplary). However, no regular structured community communication mechanism was established, and the board made no decisions citing goals when facing constituent pressure.</span>
+      </div>
+      <span class="criterion-score score-red-text">4 / 20</span>
+    </div>
+  </div>
+</section>
+
+<article class="review-body">
+
+  <div class="review-section">
+    <h2>About This Review</h2>
+    <p>This is a transcript-based governance review, covering Seattle Public Schools' board meetings from December 2025 through May 2026. Unlike reviews based on meeting minutes, this review draws on verbatim transcripts of all 14 meetings in the period — sourced from <em>transcripts.sps-by-the-numbers.com</em>, a third-party archive of SPS board meeting transcripts — enabling direct citation of what board members said and how they engaged with information.</p>
+    <p>The 20-question rubric assesses board behavior across five governance dimensions. Every scored point is cited to a specific meeting, speaker, and quote. Near-misses — evidence that was relevant but failed one of the question's criteria — are documented to demonstrate where the 0.8 confidence gate was applied.</p>
+    <p>SPS has a meaningful governance infrastructure: formally adopted student outcome goals (Policy 0020, January 2025), a guardrails framework, and Policy 1010 requiring a monitoring calendar. This review documents the gap between that architecture and actual board practice.</p>
+  </div>
+
+  <div class="review-section">
+    <h2>What the Board Does Well</h2>
+    <p>When called to engage with outcome data, this board is genuinely capable. The three monitoring sessions from December 2025 through February 2026 show a board that asks hard questions, accepts negative findings without minimization, and pushes past headline metrics to understand what the data actually reveals.</p>
+    <p>The January 14 Life Ready monitoring session is the clearest example. Staff presented a headline graduation rate of 84.8% — a number that would satisfy most boards. The SPS board did not stop there. Directors pressed on what "life ready" actually means in practice and surfaced a critical gap: only 4.6% of 11th graders had completed all four required High School and Beyond Plan activities.</p>
+
+    <div class="transcript-quote">
+      <p class="quote-text">"Directors questioned whether graduation rates accurately reflect student preparedness, noting that students admitted to Seattle Promise and other colleges often require remedial coursework."</p>
+      <p class="quote-source">January 14, 2026 — Board directors during Life Ready monitoring session</p>
+    </div>
+
+    <p>Student board members reinforced the point with ground-level evidence — one noting they used Excel rather than the district's official Naviance platform, another describing one-hour bus rides to access CTE programs. The board did not dismiss this inconsistency; it registered as a gap between what program-access data implied and what students actually experienced.</p>
+    <p>The February 4 mathematics monitoring session showed similar quality. When the math data revealed growth insufficient to close achievement gaps, Director Briggs named the implication directly rather than accepting the staff framing.</p>
+
+    <div class="transcript-quote">
+      <p class="quote-text">"Targets maintain rather than shrink gaps."</p>
+      <p class="quote-source">February 4, 2026 — Vice President Briggs during math monitoring session</p>
+    </div>
+
+    <p>That is the kind of observation that separates governance from rubber-stamping. The board also demonstrated honest engagement with declining data: multilingual learner math proficiency showing a declining trajectory across grade progression was presented without minimization and engaged with substantively. The December 3 monitoring session produced explicit requests for disaggregated data by IEP status and Native American students as separate categories — active monitoring behavior, not passive receipt.</p>
+    <p>The board's governance architecture is also genuinely strong. Three student outcome goals formally adopted by board action, with metrics and timelines, is more than most districts achieve. The April 29 goals deliberation showed directors thinking carefully about how to make the goals more operationally useful — Director Rankin proposing interim check-ins, Director LaVallee requesting a regular reporting cadence tied to actionable plans.</p>
+  </div>
+
+  <div class="review-section">
+    <h2>Where Governance Breaks Down</h2>
+
+    <div class="highlight-box">
+      <strong>Issue 1 — Monitoring Exists Only in Special Sessions</strong>
+      All three dedicated monitoring sessions in this review period were specially called meetings. Not one regular board meeting in six months included a standing outcome monitoring item. When budget pressures, immigration controversies, curriculum debates, and a superintendent transition filled the regular meeting calendar, outcome monitoring simply did not happen. The board went from the Feb 4 monitoring session — the sharpest data engagement in the review period — to zero monitoring across eight straight meetings (Feb 11 through May 13). A board that monitors outcomes only when it creates a special meeting to do so has not institutionalized monitoring; it has approximated it.
+    </div>
+
+    <div class="highlight-box">
+      <strong>Issue 2 — The Guardrails Framework Is Losing Its Teeth</strong>
+      SPS adopted five guardrails in January 2025 using "the superintendent shall not" framing — the standard language for a governance constraint. On April 29, 2026, Superintendent Shuldiner proposed reframing them to "the district led by the superintendent shall work towards" language. Director Briggs raised the core problem directly: it becomes impossible to evaluate compliance with aspirational language. As of the review period, the board had not resolved this dispute. If the reframe proceeds without a measurability requirement, the guardrails — currently scoring at 3/5 — will become functionally unenforceable.
+    </div>
+
+    <div class="highlight-box">
+      <strong>Issue 3 — Budget Decisions Are Disconnected from Goals</strong>
+      In a district managing a structural deficit of roughly $100 million, budget decisions were the most consequential governance work of the review period. Yet in 13 of 14 meetings, budget discussions contained no explicit connection between specific allocations and the three named student outcome goals. The January 28 budget work session was the exception — Superintendent Podesta explicitly framed the budget as "a funding plan to achieve our goals" and mapped investments to all three goals.
+
+      <div class="transcript-quote" style="margin-top:.75rem">
+        <p class="quote-text">"The budget is a funding plan to achieve our goals, not just, oh, $80 million short, what are we gonna do about that?"</p>
+        <p class="quote-source">January 28, 2026 — Superintendent Podesta during budget work session</p>
+      </div>
+
+      That framing did not carry forward. March and May budget sessions addressed the deficit as a fiscal problem, not a goal-alignment problem. Of five qualifying major expenditures in the review period, only the ELA curriculum adoption had an explicit goal connection in deliberation.
+    </div>
+
+    <div class="highlight-box">
+      <strong>Issue 4 — Community Has No Regular Window Into Goal Progress</strong>
+      SPS has three formally adopted student outcome goals. As of the close of this review period, no regular structured mechanism existed for the public to track progress against those goals. On April 29, Director LaVallee requested a quarterly reporting cadence; on May 6, over 1,000 community members engaged in budget sessions. But the budget sessions were about resource decisions, not goal progress. The public currently has access to goal monitoring only by attending the same special sessions the board attends — and those special sessions stopped after February.
+    </div>
+  </div>
+
+  <div class="review-section">
+    <h2>The Time Use Picture</h2>
+    <p>Transcript-based time use analysis across all 14 meetings reveals a board whose agenda is dominated by operational content. Of 1,775 total public meeting minutes in the review period, only 300 minutes — 16.9% — were goal-focused (Goal Monitoring + Goal Setting combined). The ESB benchmark target is 50%.</p>
+    <p>The more revealing number is the distribution. Goal-focused time was concentrated in three special sessions: Dec 3 (69.6%), Jan 14 (73.9%), Feb 4 (45.8%), and Apr 29 (56.5%). Nine of fourteen meetings had zero goal-focused time. Public testimony (primarily on immigration enforcement, budget cuts, and special education) consumed a disproportionate share of the regular meeting calendar, with no mechanism to ensure goal monitoring persisted through the turbulence.</p>
+    <p>The top categories in the "Other" bucket — the 66% of meeting time not classified as goal-focused or operational governance — were public testimony, recognition ceremonies, superintendent/staff reports, and immigration protocol discussions. None of these are unimportant. But their dominance of regular meeting time, combined with the total absence of monitoring from the second half of the review period, confirms that SPS's outcome governance is a special-session phenomenon, not an embedded practice.</p>
+  </div>
+
+  <div class="review-section">
+    <h2>Full Score Detail</h2>
+    <table class="score-table">
+      <thead>
+        <tr>
+          <th>Question</th>
+          <th>What It Measures</th>
+          <th>Evidence Count</th>
+          <th class="q-score">Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="area-row">
+          <td colspan="3">Area 1: Focus Mindset</td>
+          <td class="q-score">11 / 20</td>
+        </tr>
+        <tr>
+          <td>Q1 — Time allocation</td>
+          <td>Meetings where outcome content &gt;40% of time</td>
+          <td>4 meetings (Dec 3, Jan 14, Feb 4, Apr 29)</td>
+          <td class="q-score q-orange">4</td>
+        </tr>
+        <tr>
+          <td>Q2 — Outcome frame in deliberation</td>
+          <td>Board invokes goals during non-goal agenda items</td>
+          <td>2 meetings (Jan 28, Mar 18)</td>
+          <td class="q-score q-red">2</td>
+        </tr>
+        <tr>
+          <td>Q3 — Adult accountability</td>
+          <td>Board proposes board-level process changes in response to data</td>
+          <td>1 meeting (Apr 29 — Rankin, LaVallee)</td>
+          <td class="q-score q-red">1</td>
+        </tr>
+        <tr>
+          <td>Q4 — Visible priority signal</td>
+          <td>Meetings with all three: outcome item + board comment + non-ceremonial framing</td>
+          <td>4 meetings (Dec 3, Jan 14, Feb 4, Apr 29)</td>
+          <td class="q-score q-orange">4</td>
+        </tr>
+        <tr class="area-row">
+          <td colspan="3">Area 2: Clarify Priorities</td>
+          <td class="q-score">13 / 20</td>
+        </tr>
+        <tr>
+          <td>Q5 — Written goals exist</td>
+          <td>Document quality scale: ≤5 board-adopted outcome goals</td>
+          <td>3 goals, Policy 0020 (Jan 29, 2025); baseline TBD in policy</td>
+          <td class="q-score q-orange">4</td>
+        </tr>
+        <tr>
+          <td>Q6 — Goals known and referenced</td>
+          <td>Goals named unprompted during non-goal agenda items</td>
+          <td>2 meetings (Jan 28, Mar 18)</td>
+          <td class="q-score q-red">2</td>
+        </tr>
+        <tr>
+          <td>Q7 — Goals are SMART</td>
+          <td>Document quality scale: metric, target, baseline, timeline</td>
+          <td>Metric + directional target + timeline; numerical baseline not formally adopted</td>
+          <td class="q-score q-orange">4</td>
+        </tr>
+        <tr>
+          <td>Q8 — Guardrails exist</td>
+          <td>Document quality scale: written constraints on superintendent authority</td>
+          <td>5 guardrails; principled not operational; reframing dispute active Apr 29</td>
+          <td class="q-score q-red">3</td>
+        </tr>
+        <tr class="area-row">
+          <td colspan="3">Area 3: Monitor Progress</td>
+          <td class="q-score">8 / 20</td>
+        </tr>
+        <tr>
+          <td>Q9 — Regular data review</td>
+          <td>Meetings with dedicated, substantive outcome data review</td>
+          <td>3 qualifying; <em>pre-constraint (episodic) caps at 2</em></td>
+          <td class="q-score q-red">2</td>
+        </tr>
+        <tr>
+          <td>Q10 — Board knows status</td>
+          <td>On-track/off-track vs. named goal explicitly stated</td>
+          <td>3 meetings (Dec 3, Jan 14, Feb 4)</td>
+          <td class="q-score q-red">3</td>
+        </tr>
+        <tr>
+          <td>Q11 — Active monitoring</td>
+          <td>Meetings with ≥2 distinct active monitoring behaviors</td>
+          <td>3 meetings (Dec 3, Jan 14, Feb 4)</td>
+          <td class="q-score q-red">3</td>
+        </tr>
+        <tr>
+          <td>Q12 — Self-examination when data stalls</td>
+          <td>Board-level response to stalled data (not just staff-directed)</td>
+          <td>Stalled data observed Feb 4; board directed staff, not itself</td>
+          <td class="q-score q-red">0</td>
+        </tr>
+        <tr class="area-row">
+          <td colspan="3">Area 4: Align Resources</td>
+          <td class="q-score">4 / 20</td>
+        </tr>
+        <tr>
+          <td>Q13 — Budget reflects goals</td>
+          <td>Budget items explicitly connected to named goals in discussion</td>
+          <td>1 meeting (Jan 28)</td>
+          <td class="q-score q-red">1</td>
+        </tr>
+        <tr>
+          <td>Q14 — Expenditures connect to goals</td>
+          <td>% of major expenditures with goal connection (26–50% = 2)</td>
+          <td>2 of 5 qualifying expenditures (eMERGE curriculum, Mar 18 + Apr 22)</td>
+          <td class="q-score q-red">2</td>
+        </tr>
+        <tr>
+          <td>Q15 — Defund non-performers</td>
+          <td>Outcome-based defunding decision observed</td>
+          <td><em>Prerequisite not met:</em> all cuts fiscal, not outcome-based</td>
+          <td class="q-score q-red">0</td>
+        </tr>
+        <tr>
+          <td>Q16 — Policy decisions governed by goals</td>
+          <td>Non-budget decisions explicitly invoke named goals</td>
+          <td>1 meeting (Mar 18 — ELA curriculum adoption)</td>
+          <td class="q-score q-red">1</td>
+        </tr>
+        <tr class="area-row">
+          <td colspan="3">Area 5: Communicate Results</td>
+          <td class="q-score">4 / 20</td>
+        </tr>
+        <tr>
+          <td>Q17 — Plain-language communication</td>
+          <td>Outcome data communicated accessibly to non-specialists</td>
+          <td>2 qualifying; <em>pre-constraint (no structured community engagement) caps at 1</em></td>
+          <td class="q-score q-red">1</td>
+        </tr>
+        <tr>
+          <td>Q18 — Honest reporting of shortfalls</td>
+          <td>Negative data presented without minimization</td>
+          <td>3 meetings (Dec 3, Jan 14, Feb 4)</td>
+          <td class="q-score q-red">3</td>
+        </tr>
+        <tr>
+          <td>Q19 — Regular community access</td>
+          <td>Structured community outcome reporting mechanism established</td>
+          <td>No mechanism established in review period</td>
+          <td class="q-score q-red">0</td>
+        </tr>
+        <tr>
+          <td>Q20 — Whole-community interest</td>
+          <td>Decisions cite goals when facing constituent pressure</td>
+          <td><em>Prerequisite met</em> (pressure observed); no qualifying rationale</td>
+          <td class="q-score q-red">0</td>
+        </tr>
+        <tr class="total-row">
+          <td colspan="3">Composite Score</td>
+          <td class="q-score">40 / 100</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="review-section">
+    <h2>One Specific Recommendation</h2>
+    <div class="recommendation-box">
+      <p class="rec-label">Structural Change</p>
+      <p>The board should vote, before July 2026, on three interlinked actions: (1) adopt a binding monitoring calendar under Policy 1010 that assigns a standing 30-minute "Goal [1/2/3] Status Update" item to every regular board meeting, rotating across goals on a published schedule with a staff memo required 72 hours in advance; (2) vote the revised numerical baselines and targets deliberated April 29 into Policy 0020 as a formal amendment, so the goals meet the Score-5 SMART threshold; and (3) resolve the guardrails reframing dispute in favor of retaining "the superintendent shall not" constraint language paired with measurable compliance indicators, rather than converting guardrails to aspirational framing. These three actions address the root cause of SPS's governance gap: strong written commitments that are not structurally enforced.</p>
+    </div>
+  </div>
+
+  <div class="review-section">
+    <h2>Governance Takeaway</h2>
+    <div class="takeaway-box">
+      <p class="tak-label">What All Boards Can Learn</p>
+      <p>A board that only monitors student outcomes when it creates a special meeting to do so has not institutionalized outcome governance — the strongest boards understand that architecture is not practice, and that the distance between written goals and actual governance discipline is closed not by intention but by structure: a monitoring calendar that makes oversight inevitable whether or not there is a budget crisis, a superintendent transition, or a community controversy in the same week.</p>
+    </div>
+  </div>
+
+</article>
+
+<div class="disclaimer">
+  <p>This review is based on verbatim meeting transcripts published at transcripts.sps-by-the-numbers.com, covering Seattle Public Schools board meetings from December 2025 through May 2026. Seattle Public Schools is an actual school district; all data, scores, quotes, and findings in this review reflect the actual content of those public meetings. Policy references (Policy 0020, Policy 1010) are drawn from officially adopted SPS board policy. This review represents the analytical assessment of the School Board Review editorial team applying the v4.0 transcript-based methodology.</p>
+</div>
+
+<footer class="footer">
+  <p class="footer-logo">School Board Review</p>
+  <p>Public meetings, publicly reviewed.</p>
+  <p>&copy; 2026 School Board Review</p>
+</footer>
+
+</body>
+</html>
