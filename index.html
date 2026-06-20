@@ -431,11 +431,11 @@
   <div class="hero-strip">
     <div class="hero-inner">
       <div class="hero-stat">
-        <span class="hero-stat-number">247</span>
+        <span class="hero-stat-number" id="stat-count">6</span>
         <span class="hero-stat-label">Districts Reviewed</span>
       </div>
       <div class="hero-stat">
-        <span class="hero-stat-number">52<span style="font-size:2rem;">/100</span></span>
+        <span class="hero-stat-number" id="stat-avg">57<span style="font-size:2rem;">/100</span></span>
         <span class="hero-stat-label">Average Governance Score</span>
       </div>
       <div class="hero-stat">
@@ -818,6 +818,28 @@
       </div>
     </div>
   </section>
+
+  <script>
+    (function() {
+      var cards = document.querySelectorAll('.district-card');
+      var scores = [];
+      cards.forEach(function(card) {
+        var el = card.querySelector('.composite-score');
+        if (el) {
+          var txt = el.textContent.trim().split('/')[0].trim();
+          var n = parseInt(txt, 10);
+          if (!isNaN(n)) scores.push(n);
+        }
+      });
+      var countEl = document.getElementById('stat-count');
+      if (countEl) countEl.childNodes[0].textContent = scores.length;
+      var avgEl = document.getElementById('stat-avg');
+      if (avgEl && scores.length) {
+        var avg = Math.round(scores.reduce(function(a,b){return a+b;},0) / scores.length);
+        avgEl.childNodes[0].textContent = avg;
+      }
+    })();
+  </script>
 
   <!-- FOOTER -->
   <footer>
