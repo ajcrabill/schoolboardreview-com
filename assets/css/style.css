@@ -930,6 +930,52 @@
       margin: 0 auto 0.4rem;
     }
 
+    /* ── TIME USE STRIP (review pages) ── */
+    .time-use-strip { background: #2e1f47; border-top: 1px solid rgba(255,255,255,.08); padding: 1.25rem 2rem; }
+    .time-use-inner { max-width: 780px; margin: 0 auto; display: flex; gap: 2.5rem; flex-wrap: wrap; align-items: center; }
+    .time-stat { display: flex; flex-direction: column; }
+    .time-stat-num { font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: #fff; line-height: 1; }
+    .time-stat-label { font-size: .72rem; color: rgba(255,255,255,.5); margin-top: .2rem; font-weight: 500; }
+    .time-use-note { font-size: .8rem; color: rgba(255,255,255,.45); font-style: italic; flex: 1; min-width: 200px; line-height: 1.55; }
+
+    /* ── REVIEW BODY SECTIONS ── */
+    .review-body { max-width: 780px; margin: 0 auto; padding: 0 2rem; }
+    .review-section { padding: 2.5rem 0; border-bottom: 1px solid #e8e2f0; }
+    .review-section:last-of-type { border-bottom: none; }
+    .review-section h2 { font-family: 'DM Serif Display', serif; font-size: 1.35rem; color: #3A2857; margin-bottom: 1rem; }
+    .review-section p { font-size: .975rem; line-height: 1.8; color: #2d2540; margin-bottom: .9rem; }
+    .review-section p:last-child { margin-bottom: 0; }
+
+    .highlight-box { background: #F5F0FF; border-left: 3px solid #553C7B; border-radius: 0 6px 6px 0; padding: 1rem 1.25rem; margin-bottom: 1rem; font-size: .95rem; line-height: 1.7; color: #2d2540; }
+    .highlight-box strong { color: #3A2857; font-weight: 600; display: block; margin-bottom: .25rem; font-size: .875rem; text-transform: uppercase; letter-spacing: .05em; }
+
+    .transcript-quote { background: #fff; border: 1px solid #e2daea; border-left: 3px solid #27AE60; border-radius: 0 6px 6px 0; padding: 1rem 1.25rem; margin: 1rem 0; font-size: .9rem; line-height: 1.7; color: #2d2540; }
+    .transcript-quote .quote-text { font-style: italic; color: #3A2857; margin-bottom: .35rem; }
+    .transcript-quote .quote-source { font-size: .75rem; font-weight: 600; color: #6B6580; letter-spacing: .04em; text-transform: uppercase; }
+
+    .recommendation-box { background: #3A2857; color: #fff; border-radius: 8px; padding: 1.75rem; margin-top: .5rem; }
+    .recommendation-box .rec-label { font-size: .7rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: #E8E0F5; opacity: .75; margin-bottom: .75rem; }
+    .recommendation-box p { font-size: .95rem; line-height: 1.75; color: rgba(255,255,255,.85); margin-bottom: 0; }
+
+    .takeaway-box { background: #E8E0F5; border-radius: 8px; padding: 1.75rem; margin-top: .5rem; }
+    .takeaway-box .tak-label { font-size: .7rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: #553C7B; opacity: .8; margin-bottom: .75rem; }
+    .takeaway-box p { font-size: .975rem; line-height: 1.8; color: #3A2857; font-style: italic; font-family: 'DM Serif Display', serif; margin-bottom: 0; }
+
+    /* ── SCORE TABLE (review pages) ── */
+    .score-table { width: 100%; border-collapse: collapse; font-size: .85rem; margin-top: 1rem; }
+    .score-table th { background: #3A2857; color: #fff; padding: .6rem .85rem; text-align: left; font-weight: 600; font-size: .75rem; letter-spacing: .05em; text-transform: uppercase; }
+    .score-table td { padding: .55rem .85rem; border-bottom: 1px solid #e8e2f0; color: #2d2540; line-height: 1.4; }
+    .score-table tr:last-child td { border-bottom: none; }
+    .score-table tr.area-row td { background: #F5F0FF; font-weight: 600; color: #3A2857; font-size: .8rem; }
+    .score-table tr.total-row td { background: #3A2857; color: #fff; font-weight: 700; }
+    .q-score { font-weight: 700; text-align: right; white-space: nowrap; }
+    .q-red { color: #E74C3C; }
+    .q-orange { color: #F39C12; }
+    .q-green { color: #27AE60; }
+
+    .disclaimer { max-width: 780px; margin: 0 auto; padding: 2rem 2rem 3.5rem; }
+    .disclaimer p { font-size: .8rem; line-height: 1.7; color: #8a82a0; font-style: italic; }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
       .nav { padding: 0 1rem; }
@@ -938,6 +984,8 @@
       .score-breakdown { padding: 2rem 1.25rem; }
       .review-body { padding: 0 1.25rem; }
       .disclaimer { padding: 1.5rem 1.25rem 3rem; }
+      .time-use-strip { padding: 1rem 1.25rem; }
+      .time-use-inner { gap: 1.5rem; }
       .criterion-row {
         grid-template-columns: 130px 1fr 44px;
         gap: 0.5rem 0.75rem;
