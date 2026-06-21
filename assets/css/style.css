@@ -725,6 +725,28 @@
       font-weight: 300;
       margin-top: 0.15rem;
     }
+    .composite-score .score-tier-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #f0a0a0;
+      margin-top: 0.35rem;
+    }
+    .transcript-tag {
+      display: inline-block;
+      background: rgba(39,174,96,0.2);
+      border: 1px solid rgba(39,174,96,0.4);
+      color: #7dffb3;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.75rem;
+      border-radius: 3px;
+      margin-bottom: 0.6rem;
+      margin-left: 0.5rem;
+    }
 
     /* ── SCORE BREAKDOWN ── */
     .score-breakdown {
