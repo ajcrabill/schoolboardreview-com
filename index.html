@@ -2,16 +2,17 @@
 layout: default
 title: "School Board Review — Governance Scorecard"
 ---
+{% assign reviews = site.pages | where: "layout", "review" | sort: "date" | reverse %}
 
   <!-- HERO STAT STRIP -->
   <div class="hero-strip">
     <div class="hero-inner">
       <div class="hero-stat">
-        <span class="hero-stat-number" id="stat-count">7</span>
+        <span class="hero-stat-number" id="stat-count">{{ reviews | size }}</span>
         <span class="hero-stat-label">Districts Reviewed</span>
       </div>
       <div class="hero-stat">
-        <span class="hero-stat-number" id="stat-avg">55<span style="font-size:2rem;">/100</span></span>
+        <span class="hero-stat-number" id="stat-avg">{% assign total = 0 %}{% for r in reviews %}{% assign total = total | plus: r.score %}{% endfor %}{{ total | divided_by: reviews.size }}<span style="font-size:2rem;">/100</span></span>
         <span class="hero-stat-label">Average Governance Score</span>
       </div>
       <div class="hero-stat">
@@ -78,329 +79,42 @@ title: "School Board Review — Governance Scorecard"
       </div>
 
       <div class="cards-grid">
+        {% for review in reviews %}
+        {% if review.score >= 70 %}
+          {% assign score_class = "score-green" %}
+          {% assign tier_class = "tier-green" %}
+          {% if review.score >= 80 %}
+            {% assign tier_label = "Exemplary" %}
+          {% else %}
+            {% assign tier_label = "Strong" %}
+          {% endif %}
+        {% elsif review.score >= 50 %}
+          {% assign score_class = "score-orange" %}
+          {% assign tier_class = "tier-orange" %}
+          {% assign tier_label = "Mixed" %}
+        {% else %}
+          {% assign score_class = "score-red" %}
+          {% assign tier_class = "tier-red" %}
+          {% assign tier_label = "Critical" %}
+        {% endif %}
 
-        <!-- Mesa USD — 63 -->
         <div class="district-card">
           <div class="card-top">
-            <div class="district-name">Mesa USD</div>
-            <div class="state-badge">AZ</div>
+            <div class="district-name">{{ review.title }}</div>
           </div>
           <div class="card-score-row">
-            <div class="composite-score score-green">63</div>
+            <div class="composite-score {{ score_class }}">{{ review.score }}</div>
             <div class="score-meta">
               <span class="score-denom">out of 100</span>
-              <span class="score-tier tier-green">Strong</span>
-            </div>
-          </div>
-          <div class="card-criteria">
-            <div class="mini-bar-row">
-              <span class="mini-label">Focus Mindset</span>
-              <div class="score-bar-track"><div class="score-bar-fill score-high" style="width:85%"></div></div>
-              <span class="mini-score-num score-green">8.5</span>
-            </div>
-            <div class="mini-bar-row">
-              <span class="mini-label">Clarify Priorities</span>
-              <div class="score-bar-track"><div class="score-bar-fill score-high" style="width:80%"></div></div>
-              <span class="mini-score-num score-green">16</span>
-            </div>
-            <div class="mini-bar-row">
-              <span class="mini-label">Monitor Progress</span>
-              <div class="score-bar-track"><div class="score-bar-fill score-mid" style="width:55%"></div></div>
-              <span class="mini-score-num score-orange">22</span>
-            </div>
-            <div class="mini-bar-row">
-              <span class="mini-label">Align Resources</span>
-              <div class="score-bar-track"><div class="score-bar-fill score-mid" style="width:65%"></div></div>
-              <span class="mini-score-num score-orange">13</span>
-            </div>
-            <div class="mini-bar-row">
-              <span class="mini-label">Communicate Results</span>
-              <div class="score-bar-track"><div class="score-bar-fill score-low" style="width:35%"></div></div>
-              <span class="mini-score-num score-red">3.5</span>
+              <span class="score-tier {{ tier_class }}">{{ tier_label }}</span>
             </div>
           </div>
           <div class="card-footer">
-            <span class="meeting-date">May 14, 2026</span>
-            <a href="/reviews/mesa-usd-may-2026.html" class="read-more">Read full review &rarr;</a>
+            <span class="meeting-date">{{ review.meeting_date }}</span>
+            <a href="{{ review.url }}" class="read-more">Read full review &rarr;</a>
           </div>
         </div>
-
-        <!-- Jefferson City SD — 42.5 -->
-        <div class="district-card">
-          <div class="card-top">
-            <div class="district-name">Jefferson City SD</div>
-            <div class="state-badge">MO</div>
-          </div>
-          <div class="card-score-row">
-            <div class="composite-score score-orange">42.5</div>
-            <div class="score-meta">
-              <span class="score-denom">out of 100</span>
-              <span class="score-tier tier-orange">Mixed</span>
-            </div>
-          </div>
-          <div class="card-criteria">
-            <div class="mini-bar-row">
-              <span class="mini-label">Focus Mindset</span>
-              <div class="score-bar-track"><div class="score-bar-fill score-mid" style="width:50%"></div></div>
-              <span class="mini-score-num score-orange">5</span>
-            </div>
-            <div class="mini-bar-row">
-              <span class="mini-label">Clarify Priorities</span>
-              <div class="score-bar-track"><div class="score-bar-fill score-low" style="width:30%"></div></div>
-              <span class="mini-score-num score-red">6</span>
-            </div>
-            <div class="mini-bar-row">
-              <span class="mini-label">Monitor Progress</span>
-              <div class="score-bar-track"><div class="score-bar-fill score-low" style="width:40%"></div></div>
-              <span class="mini-score-num score-red">16</span>
-            </div>
-            <div class="mini-bar-row">
-              <span class="mini-label">Align Resources</span>
-              <div class="score-bar-track"><div class="score-bar-fill score-mid" style="width:55%"></div></div>
-              <span class="mini-score-num score-orange">11</span>
-            </div>
-            <div class="mini-bar-row">
-              <span class="mini-label">Communicate Results</span>
-              <div class="score-bar-track"><div class="score-bar-fill score-low" style="width:45%"></div></div>
-              <span class="mini-score-num score-red">4.5</span>
-            </div>
-          </div>
-          <div class="card-footer">
-            <span class="meeting-date">May 20, 2026</span>
-            <a href="/reviews/jefferson-city-sd-may-2026.html" class="read-more">Read full review &rarr;</a>
-          </div>
-        </div>
-
-        <!-- Fairview ISD — 82 -->
-        <div class="district-card">
-          <div class="card-top">
-            <div class="district-name">Fairview ISD</div>
-            <div class="state-badge">TX</div>
-          </div>
-          <div class="card-score-row">
-            <div class="composite-score score-green">82</div>
-            <div class="score-meta">
-              <span class="score-denom">out of 100</span>
-              <span class="score-tier tier-green">Exemplary</span>
-            </div>
-          </div>
-          <div class="card-criteria">
-            <div class="mini-bar-row">
-              <span class="mini-label">Focus Mindset</span>
-              <div class="score-bar-track"><div class="score-bar-fill score-high" style="width:90%"></div></div>
-              <span class="mini-score-num score-green">9</span>
-            </div>
-            <div class="mini-bar-row">
-              <span class="mini-label">Clarify Priorities</span>
-              <div class="score-bar-track"><div class="score-bar-fill score-high" style="width:85%"></div></div>
-              <span class="mini-score-num score-green">17</span>
-            </div>
-            <div class="mini-bar-row">
-              <span class="mini-label">Monitor Progress</span>
-              <div class="score-bar-track"><div class="score-bar-fill score-high" style="width:80%"></div></div>
-              <span class="mini-score-num score-green">32</span>
-            </div>
-            <div class="mini-bar-row">
-              <span class="mini-label">Align Resources</span>
-              <div class="score-bar-track"><div class="score-bar-fill score-high" style="width:80%"></div></div>
-              <span class="mini-score-num score-green">16</span>
-            </div>
-            <div class="mini-bar-row">
-              <span class="mini-label">Communicate Results</span>
-              <div class="score-bar-track"><div class="score-bar-fill score-high" style="width:80%"></div></div>
-              <span class="mini-score-num score-green">8</span>
-            </div>
-          </div>
-          <div class="card-footer">
-            <span class="meeting-date">May 11, 2026</span>
-            <a href="/reviews/fairview-isd-may-2026.html" class="read-more">Read full review &rarr;</a>
-          </div>
-        </div>
-
-        <!-- Cleveland Metro SD — 37.5 -->
-        <div class="district-card">
-          <div class="card-top">
-            <div class="district-name">Cleveland Metro SD</div>
-            <div class="state-badge">OH</div>
-          </div>
-          <div class="card-score-row">
-            <div class="composite-score score-red">37.5</div>
-            <div class="score-meta">
-              <span class="score-denom">out of 100</span>
-              <span class="score-tier tier-red">Critical</span>
-            </div>
-          </div>
-          <div class="card-criteria">
-            <div class="mini-bar-row">
-              <span class="mini-label">Focus Mindset</span>
-              <div class="score-bar-track"><div class="score-bar-fill score-low" style="width:40%"></div></div>
-              <span class="mini-score-num score-red">4</span>
-            </div>
-            <div class="mini-bar-row">
-              <span class="mini-label">Clarify Priorities</span>
-              <div class="score-bar-track"><div class="score-bar-fill score-low" style="width:30%"></div></div>
-              <span class="mini-score-num score-red">6</span>
-            </div>
-            <div class="mini-bar-row">
-              <span class="mini-label">Monitor Progress</span>
-              <div class="score-bar-track"><div class="score-bar-fill score-low" style="width:35%"></div></div>
-              <span class="mini-score-num score-red">14</span>
-            </div>
-            <div class="mini-bar-row">
-              <span class="mini-label">Align Resources</span>
-              <div class="score-bar-track"><div class="score-bar-fill score-mid" style="width:50%"></div></div>
-              <span class="mini-score-num score-orange">10</span>
-            </div>
-            <div class="mini-bar-row">
-              <span class="mini-label">Communicate Results</span>
-              <div class="score-bar-track"><div class="score-bar-fill score-low" style="width:35%"></div></div>
-              <span class="mini-score-num score-red">3.5</span>
-            </div>
-          </div>
-          <div class="card-footer">
-            <span class="meeting-date">May 27, 2026</span>
-            <a href="/reviews/cleveland-metro-sd-may-2026.html" class="read-more">Read full review &rarr;</a>
-          </div>
-        </div>
-
-        <!-- Bellevue SD — 76 -->
-        <div class="district-card">
-          <div class="card-top">
-            <div class="district-name">Bellevue SD</div>
-            <div class="state-badge">WA</div>
-          </div>
-          <div class="card-score-row">
-            <div class="composite-score score-green">76</div>
-            <div class="score-meta">
-              <span class="score-denom">out of 100</span>
-              <span class="score-tier tier-green">Strong</span>
-            </div>
-          </div>
-          <div class="card-criteria">
-            <div class="mini-bar-row">
-              <span class="mini-label">Focus Mindset</span>
-              <div class="score-bar-track"><div class="score-bar-fill score-high" style="width:90%"></div></div>
-              <span class="mini-score-num score-green">9</span>
-            </div>
-            <div class="mini-bar-row">
-              <span class="mini-label">Clarify Priorities</span>
-              <div class="score-bar-track"><div class="score-bar-fill score-high" style="width:85%"></div></div>
-              <span class="mini-score-num score-green">17</span>
-            </div>
-            <div class="mini-bar-row">
-              <span class="mini-label">Monitor Progress</span>
-              <div class="score-bar-track"><div class="score-bar-fill score-high" style="width:75%"></div></div>
-              <span class="mini-score-num score-green">30</span>
-            </div>
-            <div class="mini-bar-row">
-              <span class="mini-label">Align Resources</span>
-              <div class="score-bar-track"><div class="score-bar-fill score-mid" style="width:60%"></div></div>
-              <span class="mini-score-num score-orange">12</span>
-            </div>
-            <div class="mini-bar-row">
-              <span class="mini-label">Communicate Results</span>
-              <div class="score-bar-track"><div class="score-bar-fill score-high" style="width:80%"></div></div>
-              <span class="mini-score-num score-green">8</span>
-            </div>
-          </div>
-          <div class="card-footer">
-            <span class="meeting-date">June 3, 2026</span>
-            <a href="/reviews/bellevue-sd-may-2026.html" class="read-more">Read full review &rarr;</a>
-          </div>
-        </div>
-
-        <!-- Birmingham City Schools — 29.5 -->
-        <div class="district-card">
-          <div class="card-top">
-            <div class="district-name">Birmingham City Schools</div>
-            <div class="state-badge">AL</div>
-          </div>
-          <div class="card-score-row">
-            <div class="composite-score score-red">29.5</div>
-            <div class="score-meta">
-              <span class="score-denom">out of 100</span>
-              <span class="score-tier tier-red">Critical</span>
-            </div>
-          </div>
-          <div class="card-criteria">
-            <div class="mini-bar-row">
-              <span class="mini-label">Focus Mindset</span>
-              <div class="score-bar-track"><div class="score-bar-fill score-low" style="width:30%"></div></div>
-              <span class="mini-score-num score-red">3</span>
-            </div>
-            <div class="mini-bar-row">
-              <span class="mini-label">Clarify Priorities</span>
-              <div class="score-bar-track"><div class="score-bar-fill score-low" style="width:25%"></div></div>
-              <span class="mini-score-num score-red">5</span>
-            </div>
-            <div class="mini-bar-row">
-              <span class="mini-label">Monitor Progress</span>
-              <div class="score-bar-track"><div class="score-bar-fill score-low" style="width:30%"></div></div>
-              <span class="mini-score-num score-red">12</span>
-            </div>
-            <div class="mini-bar-row">
-              <span class="mini-label">Align Resources</span>
-              <div class="score-bar-track"><div class="score-bar-fill score-low" style="width:35%"></div></div>
-              <span class="mini-score-num score-red">7</span>
-            </div>
-            <div class="mini-bar-row">
-              <span class="mini-label">Communicate Results</span>
-              <div class="score-bar-track"><div class="score-bar-fill score-low" style="width:25%"></div></div>
-              <span class="mini-score-num score-red">2.5</span>
-            </div>
-          </div>
-          <div class="card-footer">
-            <span class="meeting-date">June 10, 2026</span>
-            <a href="/reviews/birmingham-city-schools-may-2026.html" class="read-more">Read full review &rarr;</a>
-          </div>
-        </div>
-
-        <!-- Seattle Public Schools — 40.5 (transcript-based) -->
-        <div class="district-card">
-          <div class="card-top">
-            <div class="district-name">Seattle Public Schools</div>
-            <div class="state-badge">WA</div>
-          </div>
-          <div class="card-score-row">
-            <div class="composite-score score-orange">40.5</div>
-            <div class="score-meta">
-              <span class="score-denom">out of 100</span>
-              <span class="score-tier tier-orange">Mixed</span>
-            </div>
-          </div>
-          <div class="card-criteria">
-            <div class="mini-bar-row">
-              <span class="mini-label">Focus Mindset</span>
-              <div class="score-bar-track"><div class="score-bar-fill score-mid" style="width:55%"></div></div>
-              <span class="mini-score-num score-orange">5.5</span>
-            </div>
-            <div class="mini-bar-row">
-              <span class="mini-label">Clarify Priorities</span>
-              <div class="score-bar-track"><div class="score-bar-fill score-mid" style="width:65%"></div></div>
-              <span class="mini-score-num score-orange">13</span>
-            </div>
-            <div class="mini-bar-row">
-              <span class="mini-label">Monitor Progress</span>
-              <div class="score-bar-track"><div class="score-bar-fill score-low" style="width:40%"></div></div>
-              <span class="mini-score-num score-red">16</span>
-            </div>
-            <div class="mini-bar-row">
-              <span class="mini-label">Align Resources</span>
-              <div class="score-bar-track"><div class="score-bar-fill score-low" style="width:20%"></div></div>
-              <span class="mini-score-num score-red">4</span>
-            </div>
-            <div class="mini-bar-row">
-              <span class="mini-label">Communicate Results</span>
-              <div class="score-bar-track"><div class="score-bar-fill score-low" style="width:20%"></div></div>
-              <span class="mini-score-num score-red">2</span>
-            </div>
-          </div>
-          <div class="card-footer">
-            <span class="meeting-date">Dec 2025 – May 2026 &middot; <span style="color:#27AE60;font-weight:600;">&#10003; Transcripts</span></span>
-            <a href="/reviews/seattle-public-schools-dec2025-may2026.html" class="read-more">Read full review &rarr;</a>
-          </div>
-        </div>
-
+        {% endfor %}
       </div><!-- /cards-grid -->
     </div>
   </section>
@@ -413,52 +127,24 @@ title: "School Board Review — Governance Scorecard"
         <div class="section-rule"></div>
       </div>
       <div class="podium-grid">
+        {% assign top_reviews = reviews | sort: "score" | reverse %}
+        {% for review in top_reviews limit: 3 %}
+        {% assign podium_index = forloop.index %}
         <div class="podium-card">
-          <div class="podium-rank gold">#1</div>
+          {% if podium_index == 1 %}<div class="podium-rank gold">#1</div>
+          {% elsif podium_index == 2 %}<div class="podium-rank silver">#2</div>
+          {% else %}<div class="podium-rank bronze">#3</div>{% endif %}
           <div class="podium-info">
-            <div class="podium-district">Fairview ISD</div>
-            <div class="podium-score">82 / 100 &mdash; Exemplary</div>
+            <div class="podium-district">{{ review.title }}</div>
+            <div class="podium-score">{{ review.score }} / 100 &mdash;
+              {% if review.score >= 80 %}Exemplary
+              {% elsif review.score >= 70 %}Strong
+              {% elsif review.score >= 50 %}Mixed
+              {% else %}Critical{% endif %}
+            </div>
           </div>
-          <div class="state-badge">TX</div>
         </div>
-        <div class="podium-card">
-          <div class="podium-rank silver">#2</div>
-          <div class="podium-info">
-            <div class="podium-district">Bellevue SD</div>
-            <div class="podium-score">76 / 100 &mdash; Strong</div>
-          </div>
-          <div class="state-badge">WA</div>
-        </div>
-        <div class="podium-card">
-          <div class="podium-rank bronze">#3</div>
-          <div class="podium-info">
-            <div class="podium-district">Mesa USD</div>
-            <div class="podium-score">63 / 100 &mdash; Strong</div>
-          </div>
-          <div class="state-badge">AZ</div>
-        </div>
+        {% endfor %}
       </div>
     </div>
   </section>
-
-  <script>
-    (function() {
-      var cards = document.querySelectorAll('.district-card');
-      var scores = [];
-      cards.forEach(function(card) {
-        var el = card.querySelector('.composite-score');
-        if (el) {
-          var txt = el.textContent.trim().split('/')[0].trim();
-          var n = parseInt(txt, 10);
-          if (!isNaN(n)) scores.push(n);
-        }
-      });
-      var countEl = document.getElementById('stat-count');
-      if (countEl) countEl.childNodes[0].textContent = scores.length;
-      var avgEl = document.getElementById('stat-avg');
-      if (avgEl && scores.length) {
-        var avg = Math.round(scores.reduce(function(a,b){return a+b;},0) / scores.length);
-        avgEl.childNodes[0].textContent = avg;
-      }
-    })();
-  </script>
